@@ -60,7 +60,7 @@ function ContactPage() {
     >
       {!successMessage && (
         <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
-          <div className="bg-white p-6 shadow-lg rounded-lg">
+          <div className="p-6 rounded-lg">
             <h3 className="text-xl font-bold mb-4">Get in touch</h3>
 
             <div className="mb-4">
