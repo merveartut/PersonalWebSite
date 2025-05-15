@@ -20,11 +20,12 @@ function WorkPage() {
 
   return (
     <div
-      className={`flex flex-col h-full w-[calc(100%-160px)] m-y-auto p-y-[20px] min-w-[400px] relative ${
-        isSmallScreen ? "" : "ml-[160px]"
-      } `}
+      className={`flex flex-col min-h-screen w-full max-w-full px-4 py-5 ${
+        isSmallScreen ? "ml-0" : "ml-[160px]"
+      }`}
+      style={{ minWidth: 0 }} // allow shrinking below 400px on mobile
     >
-      <div className="flex flex-col h-screen w-full items-center justify-center p-5 fixed">
+      <div className="flex flex-col w-full items-center justify-center p-5">
         <h1 className="mb-12">Works</h1>
         {/* <p>
         Welcome to my portfolio! Below are some of the projects I’ve worked on,
@@ -33,8 +34,9 @@ function WorkPage() {
       </p> */}
         {workItems.map((item, index) => (
           <div
-            className={`my-5 py-5 flex flex-row items-center gap-5`}
+            className={`my-5 py-5 flex flex-col md:flex-row items-center gap-5`}
             key={index}
+            style={{ minWidth: 0 }}
           >
             <div className="flex flex-col gap-2">
               <h3>{item.title}</h3>

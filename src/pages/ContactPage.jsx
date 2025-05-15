@@ -54,54 +54,61 @@ function ContactPage() {
   };
   return (
     <div
-      className={`flex flex-col h-full w-[calc(100%-160px)] m-y-auto p-y-[20px] min-w-[400px] relative ${
-        isSmallScreen ? "" : "ml-[160px]"
-      } `}
+      className={`flex flex-col w-full min-h-screen items-center justify-center px-4 ${
+        isSmallScreen ? "py-10" : "ml-[160px] py-20"
+      }`}
     >
-      <div className="flex flex-col h-screen w-full items-center justify-center p-5 fixed">
-        {!successMessage && (
-          <form style={{ width: "100%" }} onSubmit={handleSubmit}>
-            <div className={styles.formCard}>
-              <h3 className={styles.header}>Get in touch</h3>
-              <div className={styles.formGroup}>
-                <TextInput
-                  name={"name"}
-                  label={"Who are u ?"}
-                  value={formData.name}
-                  setValue={handleChange}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <TextInput
-                  name="email"
-                  value={formData.email}
-                  setValue={handleChange}
-                  label={"Your email"}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <TextArea
-                  name="message"
-                  value={formData.message}
-                  setValue={handleChange}
-                />
-              </div>
-              <div className={styles.formGroupButton}>
-                <button
-                  disabled={isAnyFieldNull}
-                  className={styles.sendButton}
-                  onClick={handleSubmit}
-                >
-                  Send
-                </button>
-              </div>
+      {!successMessage && (
+        <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
+          <div className="bg-white p-6 shadow-lg rounded-lg">
+            <h3 className="text-xl font-bold mb-4">Get in touch</h3>
+
+            <div className="mb-4">
+              <TextInput
+                name={"name"}
+                label={"Who are u ?"}
+                value={formData.name}
+                setValue={handleChange}
+              />
             </div>
-          </form>
-        )}
-        {successMessage && (
-          <p className="text-green-500 font-roboto">{successMessage}</p>
-        )}
-      </div>
+
+            <div className="mb-4">
+              <TextInput
+                name="email"
+                value={formData.email}
+                setValue={handleChange}
+                label={"Your email"}
+              />
+            </div>
+
+            <div className="mb-4">
+              <TextArea
+                name="message"
+                value={formData.message}
+                setValue={handleChange}
+                className="w-full max-w-full resize-none box-border"
+              />
+            </div>
+
+            <div className="text-center">
+              <button
+                type="submit"
+                disabled={isAnyFieldNull}
+                className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+                  isAnyFieldNull
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-blue-600"
+                }`}
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </form>
+      )}
+      {successMessage && (
+        <p className="text-green-500 font-roboto mt-6">{successMessage}</p>
+      )}
     </div>
   );
 }
