@@ -41,7 +41,7 @@ function NavBar() {
   };
 
   const drawerContent = (
-    <List className={styles.list}>
+    <List className="h-full max-w-fit flex flex-col justify-center font-source">
       {menuItems.map((text, index) => (
         <ListItem
           button
@@ -72,26 +72,36 @@ function NavBar() {
   return (
     <>
       {isMobile ? (
-        <div className="flex flex-col p-6">
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={() => setDrawerOpen(true)}
-            className="p-6 static h-fit"
-          >
-            <MenuIcon />
-          </IconButton>
+        <>
+          {/* Prevent horizontal scrolling on mobile */}
+          <div className="fixed  overflow-x-hidden z-[1300] p-2 rounded-br-lg">
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => setDrawerOpen(!drawerOpen)}
+              size="large"
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
+
           <Drawer
             anchor="left"
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}
+            PaperProps={{
+              style: {
+                width: "80%", // Adjust this as needed
+                maxWidth: "120px", // Optional: Restrict max width
+              },
+            }}
           >
             {drawerContent}
           </Drawer>
-        </div>
+        </>
       ) : (
-        <div className="w-[140px] h-screen fixed top-0 left-0">
+        <div className="w-[120px] h-screen fixed top-0 left-0">
           {drawerContent}
         </div>
       )}

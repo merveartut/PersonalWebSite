@@ -24,7 +24,7 @@ function WorkPage() {
         isSmallScreen ? "" : "ml-[160px]"
       } `}
     >
-      <div className="flex flex-col h-screen w-full items-center justify-center p-5">
+      <div className="flex flex-col h-screen w-full items-center justify-center p-5 fixed">
         <h1 className="mb-12">Works</h1>
         {/* <p>
         Welcome to my portfolio! Below are some of the projects I’ve worked on,

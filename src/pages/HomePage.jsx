@@ -24,11 +24,11 @@ function HomePage() {
   return (
     <div
       ref={homePageRef}
-      className={`flex flex-col h-full w-[calc(100%-160px)] m-y-auto p-y-[20px] min-w-[400px] relative ${
+      className={`flex flex-col h-full w-[calc(100%-160px)] m-y-auto p-y-[20px] min-w-[400px] ${
         isSmallScreen ? "" : "ml-[160px]"
       } `}
     >
-      <div className="flex flex-col md:flex-row h-screen w-full gap-4 items-center justify-center p-5">
+      <div className="flex flex-col md:flex-row h-screen w-full gap-4 items-center justify-center p-5 fixed">
         <div className="flex flex-col align-middle items-center gap-8">
           <h1 className="font-source">Merve Artut</h1>
           <h3 className="font-roboto font-bold text-rose-900">

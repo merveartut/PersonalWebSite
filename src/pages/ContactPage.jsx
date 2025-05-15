@@ -58,7 +58,7 @@ function ContactPage() {
         isSmallScreen ? "" : "ml-[160px]"
       } `}
     >
-      <div className="flex flex-col h-screen w-full items-center justify-center p-5">
+      <div className="flex flex-col h-screen w-full items-center justify-center p-5 fixed">
         {!successMessage && (
           <form style={{ width: "100%" }} onSubmit={handleSubmit}>
             <div className={styles.formCard}>
