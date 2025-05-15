@@ -8,7 +8,7 @@ function TextInput({ label, value, setValue, name }) {
   return (
     <div className={styles.main}>
       <input
-        className="h-[60px]"
+        className="h-[60px] font-roboto-mono"
         name={name}
         onFocus={handleFocus}
         onBlur={handleBlur}

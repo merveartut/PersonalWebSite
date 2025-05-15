@@ -9,12 +9,13 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import Sparkle from "./Sparkle";
 import styles from "./NavBar.module.css";
 
 function NavBar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sparkles, setSparkles] = useState([]);
   const location = useLocation(); // Get the current route from react-router
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -35,30 +36,40 @@ function NavBar() {
   const selectedIndex = getSelectedIndex(); // Get selected index based on current path
 
   // Handle menu item click
-  const handleClickItem = (page, index) => {
+  const handleClickItem = (page, index, event) => {
+    const { clientX, clientY } = event;
+    setSparkles((prev) => [
+      ...prev,
+      { id: Date.now(), x: clientX, y: clientY },
+    ]);
+
+    // Remove sparkle after animation duration
+    setTimeout(() => {
+      setSparkles((prev) => prev.filter((s) => s.id !== Date.now()));
+    }, 600);
     navigate(`/${page}`);
     if (isMobile) setDrawerOpen(false); // Close drawer on mobile after click
   };
 
   const drawerContent = (
-    <List className="h-full max-w-fit flex flex-col justify-center font-source">
+    <List className="h-full max-w-fit flex flex-col justify-center font-source-code-pro gap-24">
       {menuItems.map((text, index) => (
         <ListItem
           button
           key={text}
-          className={`${styles.box} ${
-            hoveredIndex === index ? styles.hovered : ""
-          } ${selectedIndex === index ? styles.selected : ""}`}
+          className={`transition-transform duration-300 ease-in-out mb-15 cursor-pointer ${
+            hoveredIndex === index ? "translate-x-4 !bg-transparent" : ""
+          } ${selectedIndex === index ? "translate-x-2" : ""}`}
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
-          onClick={() => handleClickItem(text, index)}
+          onClick={(e) => handleClickItem(text, index, e)}
         >
           <ListItemText
             primary={
               <span
-                className={`font-source ${
-                  selectedIndex === index ? "text-orange-900" : ""
-                }`}
+                className={`font-source-code-pro text-lg ${
+                  selectedIndex === index ? "text-orange-900 font-bold" : ""
+                } ${hoveredIndex === index ? "font-bold" : ""}`}
               >
                 {text}
               </span>
@@ -105,6 +116,10 @@ function NavBar() {
           {drawerContent}
         </div>
       )}
+      {/* Sparkles */}
+      {sparkles.map(({ id, x, y }) => (
+        <Sparkle key={id} x={x} y={y} />
+      ))}
     </>
   );
 }

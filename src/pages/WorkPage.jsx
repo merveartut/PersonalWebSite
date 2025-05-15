@@ -20,7 +20,7 @@ function WorkPage() {
 
   return (
     <div
-      className={`flex flex-col min-h-screen w-full max-w-full px-4 py-5 ${
+      className={`flex flex-col h-full w-full max-w-full px-4 py-5 ${
         isSmallScreen ? "ml-0" : "ml-[160px]"
       }`}
       style={{ minWidth: 0 }} // allow shrinking below 400px on mobile

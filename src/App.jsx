@@ -15,14 +15,16 @@ function App() {
       {/* The Router should wrap the whole app */}
       <Router>
         <NavBar /> {/* NavBar can now use useNavigate */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/Home" element={<HomePage />} />
-          <Route path="/Detail" element={<CardDetailPage />} />
-          <Route path="/Works" element={<WorkPage />} />
-          <Route path="/Blog" element={<BlogPage />} />
-          <Route path="/Contact" element={<ContactPage />} />
-        </Routes>
+        <main className="flex-1 flex items-center h-screen justify-center md:ml-[120px] p-5 overflow-x-hidden ">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/Home" element={<HomePage />} />
+            <Route path="/Detail" element={<CardDetailPage />} />
+            <Route path="/Works" element={<WorkPage />} />
+            <Route path="/Blog" element={<BlogPage />} />
+            <Route path="/Contact" element={<ContactPage />} />
+          </Routes>
+        </main>
       </Router>
     </Provider>
   );

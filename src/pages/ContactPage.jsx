@@ -54,14 +54,16 @@ function ContactPage() {
   };
   return (
     <div
-      className={`flex flex-col w-full min-h-screen items-center justify-center px-4 ${
+      className={`flex flex-col w-full h-full items-center justify-center px-4 ${
         isSmallScreen ? "py-10" : "ml-[160px] py-20"
       }`}
     >
       {!successMessage && (
         <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
           <div className="p-6 rounded-lg">
-            <h3 className="text-xl font-bold mb-4">Get in touch</h3>
+            <h3 className="text-xl font-bold mb-4 font-roboto-mono">
+              Get in touch
+            </h3>
 
             <div className="mb-4">
               <TextInput
