@@ -1,0 +1,18 @@
+.gridContainer {
+  justify-content: center;
+  display: flex;
+  }
+  
+  .grid-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    display: flex; /* Allows content inside to be flexible */
+    flex-direction: column; /* Ensure child elements stack */
+  }
+  .container {
+    width: calc(100% - 160px);
+    padding: 0 20px;
+    
+  }

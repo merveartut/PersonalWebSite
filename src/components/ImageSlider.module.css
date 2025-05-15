@@ -1,0 +1,30 @@
+.slide {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.slider {
+    height: auto;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.leftArrow {
+    position: absolute;
+    top: 50%;
+    left: 32px;
+    font-size: 45px;
+    color: aliceblue;
+    z-index: 1;
+    cursor: pointer;
+}
+.rightArrow {
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    font-size: 45px;
+    color: aliceblue;
+    z-index: 1;
+    cursor: pointer;
+}

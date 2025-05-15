@@ -1,0 +1,91 @@
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 600px;
+    width: 100%;
+  }
+  
+.formCard {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+   
+}
+
+.textInput.hover {
+    border: 1px solid rgb(109, 49, 207);
+}
+.formGroup {
+    margin-bottom: 15px;
+    width: 500px;
+  }
+  .formGroupButton {
+    margin-bottom: 15px;
+    width: 500px;
+    text-align: end;
+  }
+  .label {
+    display: block;
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .textInput,
+  .textArea {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .textInput:focus,
+  .textArea:focus {
+    border-color: #007bff;
+  }
+  
+  .textArea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .header {
+    padding: 18px;
+    text-align: start;
+    width: 300px;
+    font-family: "Source Code Pro";
+  }
+  .sendButton {
+    margin-left: auto;
+    border-radius: 4px;
+    padding-inline: 16px;
+    border: none;
+    background-color: thistle;
+    font-family: "Roboto";
+    color: brown;
+    font-weight: 600;
+    cursor: pointer;
+    height: 30px;
+}
+.sendButton:hover {
+  transform: scale(1.1);
+}
+.sendButton:disabled {
+  background-color: lightgray;
+  cursor: auto;
+  color: darkgray;
+}
+.successMessage {
+  color: green;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+}

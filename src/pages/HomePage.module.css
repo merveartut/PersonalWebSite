@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    min-width: 400px;
+}
+
+.navbar {
+    width: 140px;
+    position: sticky;
+    align-items: center;
+    z-index: 10000;
+}
+
+.pageContainer {
+    height: 100%;
+    width: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-width: 400px;
+}
+.firstContent {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 16px;
+    min-width: 400px;
+}
+.description {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.descriptionText {
+    width:auto;
+    max-width: 600px;
+    text-align:start;
+    font-family: "Source Code Pro";
+}
+.imageContainer {
+    align-content: center;
+    padding: 12px;
+    max-width: 100%;
+}
+
+.image {
+    height: 300px;
+    width:400px;
+    padding: 12px;
+}
+.secondContent {
+    height: 100vh;
+    width: 100%;
+}
+.name {
+    font-family: "Source Code Pro";
+}
+.title {
+    font-family: "Roboto";
+    font-weight: 300;
+    color: brown;
+}
+.thirdContent {
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.fourthContent {
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}

@@ -1,0 +1,32 @@
+.main {
+    position: relative;
+}
+input {
+    height: 30px;
+    width: 300px;
+    border-radius: 6px;
+    border: 1px solid darkgray;
+    padding: 6px;
+    background-color: #f9f9f9;
+    font-family: "Roboto";
+}
+.main input:focus {
+    border-color: thistle;
+    outline: none;
+}
+.fill {
+    position: absolute;
+    left: 2px;
+    top: -8px;
+    width: auto;
+    text-align: center;
+    background-color: #f9f9f9;
+    font-size: 12px;
+    color: gray;
+    padding-inline: 4px;
+}
+input::placeholder {
+    font-size: 14px;
+    color: gray;
+    padding-left: 8px;
+}

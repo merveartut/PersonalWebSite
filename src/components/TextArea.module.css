@@ -1,0 +1,16 @@
+.sendButton {
+    margin-left: auto;
+    border-radius: 4px;
+    padding-inline: 16px;
+    border: none;
+    background-color: thistle;
+    font-family: "Roboto";
+    color: brown;
+    font-weight: 600;
+    cursor: pointer;
+}
+.textArea {
+    border: 1px solid darkgray !important;
+    background-color: #f9f9f9 !important;
+    --Textarea-focusedHighlight: thistle !important;
+  }
