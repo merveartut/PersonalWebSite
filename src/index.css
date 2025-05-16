@@ -15,3 +15,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 'Roboto Mono',
     monospace;
 }
+
+.cursor-magnify {
+  cursor: url('/assets/search.png'), auto;
+}

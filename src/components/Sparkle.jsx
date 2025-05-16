@@ -9,8 +9,8 @@ const Sparkle = ({ x, y }) => {
   const generateSparkles = () => {
     return Array.from({ length: sparkleCount }).map((_, index) => {
       const size = Math.random() * 15 + 10; // Random size between 10px and 25px
-      const angle = Math.random() * 360; // Random direction in degrees
-      const distance = Math.random() * 100 + 50; // Random distance (50px to 150px)
+      const angle = Math.random() * 270; // Random direction in degrees
+      const distance = Math.random() * 80 + 60; // Random distance (50px to 150px)
       const delay = Math.random() * 0.3; // Random delay for staggered effect
       const rotation = Math.random() * 360; // Random rotation
 
