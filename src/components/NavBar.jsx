@@ -95,6 +95,67 @@ function NavBar() {
           />
         </ListItem>
       ))}
+      <div className="absolute bottom-10 left-5">
+        <FormControl>
+          <Select
+            value={language}
+            onChange={handleLanguageChange}
+            variant="standard"
+            sx={{
+              // Remove underline and padding so only the flag shows
+              "&.MuiInputBase-root:before, &.MuiInputBase-root:after": {
+                borderBottom: "none !important",
+              },
+              padding: 0,
+              minWidth: 0,
+              width: "auto",
+            }}
+            renderValue={(selected) => {
+              const flagSrc = selected === "en" ? enImg : trImg;
+              return (
+                <img
+                  src={flagSrc}
+                  alt={selected}
+                  style={{
+                    width: 30,
+                    height: 20,
+                    verticalAlign: "middle",
+                  }}
+                />
+              );
+            }}
+            IconComponent={() => null}
+            size="small"
+          >
+            <MenuItem value="en">
+              <img
+                src={enImg}
+                alt="English"
+                style={{
+                  width: 20,
+                  height: 14,
+                  marginRight: 8,
+                  verticalAlign: "middle",
+                }}
+              />
+              English
+            </MenuItem>
+            <MenuItem value="tr">
+              <img
+                src={trImg}
+                alt="Türkçe"
+                style={{
+                  width: 20,
+                  height: 14,
+                  marginRight: 8,
+                  verticalAlign: "middle",
+                }}
+              />
+              Türkçe
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </div>
     </List>
   );
 
@@ -132,67 +193,6 @@ function NavBar() {
       ) : (
         <div className="w-[120px] h-screen fixed top-0 left-0">
           {drawerContent}
-          <div className="absolute bottom-10 left-5">
-            <FormControl>
-              <Select
-                value={language}
-                onChange={handleLanguageChange}
-                variant="standard"
-                sx={{
-                  // Remove underline and padding so only the flag shows
-                  "&.MuiInputBase-root:before, &.MuiInputBase-root:after": {
-                    borderBottom: "none !important",
-                  },
-                  padding: 0,
-                  minWidth: 0,
-                  width: "auto",
-                }}
-                renderValue={(selected) => {
-                  const flagSrc = selected === "en" ? enImg : trImg;
-                  return (
-                    <img
-                      src={flagSrc}
-                      alt={selected}
-                      style={{
-                        width: 30,
-                        height: 20,
-                        verticalAlign: "middle",
-                      }}
-                    />
-                  );
-                }}
-                IconComponent={() => null}
-                size="small"
-              >
-                <MenuItem value="en">
-                  <img
-                    src={enImg}
-                    alt="English"
-                    style={{
-                      width: 20,
-                      height: 14,
-                      marginRight: 8,
-                      verticalAlign: "middle",
-                    }}
-                  />
-                  English
-                </MenuItem>
-                <MenuItem value="tr">
-                  <img
-                    src={trImg}
-                    alt="Türkçe"
-                    style={{
-                      width: 20,
-                      height: 14,
-                      marginRight: 8,
-                      verticalAlign: "middle",
-                    }}
-                  />
-                  Türkçe
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </div>
         </div>
       )}
       {/* Sparkles */}

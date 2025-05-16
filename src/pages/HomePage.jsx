@@ -10,11 +10,14 @@ import htmlImg from "../assets/htm.png";
 import javaImg from "../assets/java.png";
 import vueImg from "../assets/vue.png";
 import tsImg from "../assets/typescript.png";
+import { useTranslation } from "react-i18next";
 
 function HomePage() {
   const homePageRef = useRef(null);
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
+
+  const { t, i18n } = useTranslation();
   const skills = [
     { text: "React", img: reactImg },
     { text: "Vue", img: vueImg },
@@ -85,12 +88,7 @@ function HomePage() {
       <section className="w-full h-screen flex flex-row gap-[100px] md:flex-row items-center justify-center  text-black p-10 snap-start">
         <div className="flex flex-col gap-12 items-center md:items-start mb-10 md:mb-0">
           <p className="max-w-xl font-source-code-pro text-left">
-            I’m a software developer passionate about creating digital
-            experiences that make a real impact. With a constant drive to learn
-            and grow, I focus on building innovative solutions that solve
-            problems and improve lives. My goal is to contribute to meaningful
-            projects that push the boundaries of technology and leave a lasting
-            impression.
+            {t("description")}
           </p>
         </div>
 
