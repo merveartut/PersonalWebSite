@@ -196,7 +196,7 @@ function NavBar() {
           </Drawer>
         </>
       ) : (
-        <div className="w-[120px] h-screen bg-orange-900 fixed top-0 left-0">
+        <div className="w-fit h-screen bg-orange-900 fixed top-0 left-0">
           {drawerContent}
         </div>
       )}

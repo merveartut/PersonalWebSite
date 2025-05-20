@@ -17,7 +17,7 @@ function App() {
       {/* The Router should wrap the whole app */}
       <Router>
         <NavBar /> {/* NavBar can now use useNavigate */}
-        <main className="flex-1 flex items-center h-screen justify-center md:ml-[120px] overflow-x-hidden ">
+        <main className="flex-1 flex items-center h-screen justify-center overflow-x-hidden ">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
