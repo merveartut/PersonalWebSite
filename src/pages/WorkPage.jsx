@@ -21,9 +21,7 @@ function WorkPage() {
 
   return (
     <div
-      className={`flex flex-wrap min-h-screen h-full  gap-8 items-center justify-center p-10 snap-start w-full max-w-full px-4 py-5 ${
-        isSmallScreen ? "ml-0" : "ml-[160px]"
-      }`}
+      className={`flex flex-wrap min-h-screen h-full bg-orange-900 gap-8 items-center justify-center p-10 snap-start w-full max-w-full px-4 py-5 `}
       style={{ minWidth: 0 }} // allow shrinking below 400px on mobile
     >
       {workItems.map((item, index) => (
