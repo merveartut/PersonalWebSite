@@ -42,7 +42,7 @@ function HomePage() {
       <section
         id="about"
         ref={aboutRef}
-        className="w-full !h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center  text-black p-10 !py-[32px] snap-start"
+        className="w-full !min-h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center  text-black p-10 !py-[32px] snap-start"
       >
         <AboutPage />
       </section>
@@ -50,7 +50,7 @@ function HomePage() {
       <section
         id="works"
         ref={worksRef}
-        className="h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start"
+        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start"
       >
         <WorkPage />
       </section>
@@ -59,7 +59,7 @@ function HomePage() {
       <section
         id="contact"
         ref={contactRef}
-        className="h-screen flex flex-col items-center justify-center bg-gradient-to-b  snap-start"
+        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b  snap-start"
       >
         <ContactPage />
       </section>
