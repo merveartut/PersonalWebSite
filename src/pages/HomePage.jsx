@@ -42,7 +42,7 @@ function HomePage() {
       <section
         id="about"
         ref={aboutRef}
-        className="w-full h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center  text-black p-10 !py-[32px] snap-start"
+        className="w-full !h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center  text-black p-10 !py-[32px] snap-start"
       >
         <AboutPage />
       </section>
