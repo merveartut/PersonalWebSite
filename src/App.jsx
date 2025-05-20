@@ -7,7 +7,9 @@ import CardDetailPage from "./pages/CardDetailPage";
 import WorkPage from "./pages/WorkPage";
 import BlogPage from "./pages/BlogPage";
 import ContactPage from "./pages/ContactPage";
+import { AboutPage } from "./pages/AboutPage";
 import NavBar from "./components/NavBar";
+import { SkillsPage } from "./pages/SkillsPage";
 
 function App() {
   return (
@@ -15,10 +17,12 @@ function App() {
       {/* The Router should wrap the whole app */}
       <Router>
         <NavBar /> {/* NavBar can now use useNavigate */}
-        <main className="flex-1 flex items-center h-screen justify-center md:ml-[120px] p-5 overflow-x-hidden ">
+        <main className="flex-1 flex items-center h-screen justify-center md:ml-[120px] overflow-x-hidden ">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/works" element={<WorkPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>

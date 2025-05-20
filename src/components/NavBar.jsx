@@ -29,9 +29,10 @@ function NavBar() {
 
   const navigate = useNavigate();
   const menuItems = [
-    { path: "/Home", key: "home" },
-    { path: "/Works", key: "works" },
-    { path: "/Contact", key: "contact" },
+    { path: "/home#skills", key: "home" },
+    { path: "/home#about", key: "about" },
+    { path: "/home#works", key: "works" },
+    { path: "/home#contact", key: "contact" },
   ];
 
   const handleLanguageChange = (event) => {
@@ -40,42 +41,47 @@ function NavBar() {
     i18n.changeLanguage(newLanguage);
   };
 
+  const currentPath = location.pathname.toLowerCase() + location.hash;
+
   // Update selected index based on the current route
   const getSelectedIndex = () => {
-    const currentPath = location.pathname.toLowerCase();
-    if (currentPath === "/" || currentPath === "/home") {
+    if (
+      currentPath.includes("#skills") ||
+      currentPath === "/home" ||
+      currentPath === "/"
+    )
       return 0;
-    }
-    return menuItems.findIndex((text) =>
-      currentPath.includes(text.path.toLowerCase())
-    );
+    if (currentPath.includes("#about")) return 1;
+    if (currentPath.includes("#works")) return 2;
+    if (currentPath.includes("#contact")) return 3;
+    return -1;
   };
 
   const selectedIndex = getSelectedIndex(); // Get selected index based on current path
 
   // Handle menu item click
   const handleClickItem = (page, index, event) => {
-    const { clientX, clientY } = event;
-    setSparkles((prev) => [
-      ...prev,
-      { id: Date.now(), x: clientX, y: clientY },
-    ]);
+    const [path, hash] = page.split("#");
 
-    // Remove sparkle after animation duration
-    setTimeout(() => {
-      setSparkles((prev) => prev.filter((s) => s.id !== Date.now()));
-    }, 600);
-    navigate(page);
-    if (isMobile) setDrawerOpen(false); // Close drawer on mobile after click
+    navigate(path + (hash ? `#${hash}` : ""));
+
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    if (isMobile) setDrawerOpen(false);
   };
 
   const drawerContent = (
-    <List className="h-full max-w-fit flex flex-col justify-center font-source-code-pro gap-24">
+    <List className="h-full max-w-fit flex flex-col justify-center bg-orange-900 text-stone-100 font-source-code-pro gap-24">
       {menuItems.map(({ path, key }, index) => (
         <ListItem
           key={key}
           className={`cursor-pointer ${
-            selectedIndex === index ? "text-orange-900 font-bold" : ""
+            selectedIndex === index ? "text-stone-200 font-bold" : ""
           } ${hoveredIndex === index ? "translate-x-1" : ""}`}
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -87,8 +93,8 @@ function NavBar() {
                 {t(key)}
                 <span
                   className={`block w-full h-[1px] mt-1 transition-all duration-300 ${
-                    selectedIndex === index ? "bg-orange-900" : "bg-transparent"
-                  } group-hover:bg-black`}
+                    selectedIndex === index ? "bg-stone-200" : "bg-transparent"
+                  } group-hover:bg-stone-200`}
                 />
               </span>
             }
@@ -164,15 +170,15 @@ function NavBar() {
       {isMobile ? (
         <>
           {/* Prevent horizontal scrolling on mobile */}
-          <div className="fixed  overflow-x-hidden z-[1300] p-2 rounded-br-lg">
+          <div className="fixed overflow-x-hidden bg-transparent z-[1300] p-2 rounded-br-lg">
             <IconButton
               edge="start"
-              color="inherit"
+              color="oklch(92.3% 0.003 48.717)"
               aria-label="menu"
               onClick={() => setDrawerOpen(!drawerOpen)}
               size="large"
             >
-              <MenuIcon />
+              <MenuIcon className="text-stone-200" />
             </IconButton>
           </div>
 
@@ -182,7 +188,6 @@ function NavBar() {
             onClose={() => setDrawerOpen(false)}
             PaperProps={{
               style: {
-                width: "80%", // Adjust this as needed
                 maxWidth: "120px", // Optional: Restrict max width
               },
             }}
@@ -191,7 +196,7 @@ function NavBar() {
           </Drawer>
         </>
       ) : (
-        <div className="w-[120px] h-screen fixed top-0 left-0">
+        <div className="w-[120px] h-screen bg-orange-900 fixed top-0 left-0">
           {drawerContent}
         </div>
       )}
