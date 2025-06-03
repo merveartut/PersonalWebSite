@@ -16,6 +16,10 @@ import Sparkle from "./Sparkle";
 import { useTranslation } from "react-i18next";
 import trImg from "../assets/tr.png";
 import enImg from "../assets/en.png";
+import nazar from "../assets/nazar.png"
+import daisy from "../assets/daisy.png"
+import flower from "../assets/flower.png"
+import sunflower from "../assets/sunflower.png"
 
 function NavBar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -29,8 +33,8 @@ function NavBar() {
 
   const navigate = useNavigate();
   const menuItems = [
-    { path: "/home#skills", key: "home" },
     { path: "/home#about", key: "about" },
+    { path: "/home#experience", key: "experience" },
     { path: "/home#works", key: "works" },
     { path: "/home#contact", key: "contact" },
   ];
@@ -46,12 +50,12 @@ function NavBar() {
   // Update selected index based on the current route
   const getSelectedIndex = () => {
     if (
-      currentPath.includes("#skills") ||
+      currentPath.includes("#about") ||
       currentPath === "/home" ||
       currentPath === "/"
     )
       return 0;
-    if (currentPath.includes("#about")) return 1;
+    if (currentPath.includes("#experience")) return 1;
     if (currentPath.includes("#works")) return 2;
     if (currentPath.includes("#contact")) return 3;
     return -1;
@@ -76,29 +80,28 @@ function NavBar() {
   };
 
   const drawerContent = (
-    <List className="h-full max-w-fit flex flex-col justify-center bg-orange-900 text-stone-100 font-source-code-pro gap-24">
+    <List className="h-full max-w-fit flex flex-col justify-center  text-blue-800 font-source-code-pro gap-24">
       {menuItems.map(({ path, key }, index) => (
         <ListItem
           key={key}
-          className={`cursor-pointer ${
-            selectedIndex === index ? "text-stone-200 font-bold" : ""
-          } ${hoveredIndex === index ? "translate-x-1" : ""}`}
+          className={`cursor-pointer ${selectedIndex === index ? "text-blue-800 font-bold" : ""
+            } ${hoveredIndex === index ? "translate-x-1" : ""}`}
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
           onClick={(e) => handleClickItem(path, index, e)}
         >
-          <ListItemText
-            primary={
-              <span className="relative group">
-                {t(key)}
-                <span
-                  className={`block w-full h-[1px] mt-1 transition-all duration-300 ${
-                    selectedIndex === index ? "bg-stone-200" : "bg-transparent"
-                  } group-hover:bg-stone-200`}
-                />
-              </span>
-            }
-          />
+          <div className="flex flex-row items-center w-full gap-2">
+            <ListItemText
+              primary={
+                <span className="relative group font-rubik">
+                  {t(key)}
+
+                </span>
+              }
+            />
+            {selectedIndex === index && <img src={daisy} width={16}></img>}
+          </div>
+
         </ListItem>
       ))}
       <div className="absolute bottom-10 left-5">
@@ -196,7 +199,7 @@ function NavBar() {
           </Drawer>
         </>
       ) : (
-        <div className="w-fit h-screen bg-orange-900 fixed top-0 left-0">
+        <div className="w-fit h-screen  fixed top-0 left-0">
           {drawerContent}
         </div>
       )}

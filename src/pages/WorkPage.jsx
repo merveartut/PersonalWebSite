@@ -21,24 +21,24 @@ function WorkPage() {
 
   return (
     <div
-      className={`flex flex-wrap min-h-screen h-full bg-orange-900 gap-8 items-center justify-center p-10 snap-start w-full max-w-full px-4 py-5 `}
+      className={`flex flex-wrap min-h-screen h-full  gap-8 items-center justify-center p-10 snap-start w-full max-w-full px-4 py-5 `}
       style={{ minWidth: 0 }} // allow shrinking below 400px on mobile
     >
       {workItems.map((item, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg shadow-md border-orange-900 border-2 p-6 w-[320px] h-[420px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300"
+          className="rounded-lg shadow-md border-[1px] border-stone-300 p-6 w-[320px] h-[420px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300"
           style={{
             minWidth: 0,
             cursor: `url(${magnifyIcon}) 16 16, auto`, // Custom cursor
           }}
         >
           <div className="flex flex-col gap-2 w-full flex-grow">
-            <h3 className="text-xl font-semibold">{item.title}</h3>
-            <p className="text-gray-700">{item.description}</p>
+            <h3 className="text-xl font-rubik">{item.title}</h3>
+            <p className="text-gray-700 font-roboto">{item.description}</p>
             <strong
               onClick={() => window.open(item.githubLink, "_blank")}
-              className="cursor-pointer text-blue-600 hover:underline"
+              className="cursor-pointer text-blue-600 hover:underline font-roboto-mono"
             >
               Open GitHub
             </strong>

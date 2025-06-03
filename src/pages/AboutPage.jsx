@@ -7,7 +7,7 @@ export const AboutPage = () => {
   return (
     <div className="w-full min-h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center px-4 text-black p-10 snap-start">
       <div className="flex flex-col gap-12 items-center md:items-start mb-10 md:mb-0">
-        <p className="max-w-xl font-source-code-pro text-left">
+        <p className="max-w-xl font-jura font-semibold text-left leading-[2]">
           {t("description")}
         </p>
       </div>
@@ -19,7 +19,7 @@ export const AboutPage = () => {
             alt="Profile"
             className="rounded-xl object-cover w-full h-full"
           />
-          <div className="absolute -bottom-4 -right-4 w-full h-full border-4 border-orange-900 rounded-xl"></div>
+          <div className="absolute -bottom-4 -right-4 w-full h-full border-4 border-blue-800 rounded-xl"></div>
         </div>
       </div>
     </div>

@@ -1,20 +1,21 @@
 const workItems = [
   {
-    title: "Task Manager Frontend App",
+    title: "Task Manager App",
     description:
       "An e-commerce application featuring product listings, shopping cart functionality, and a checkout process.",
-    technologies: ["React.js"],
+    technologies: ["React.js", "Spring Boot", "Spring Security", "PostgreSQL"],
     githubLink: "https://github.com/merveartut/TaskManager",
     images: [],
   },
   {
-    title: "Task Manager Backend App",
+    title: "Finance Tracker App",
     description:
       "An e-commerce application featuring product listings, shopping cart functionality, and a checkout process.",
-    technologies: ["Spring Boot", "Spring Security", "PostgreSQL"],
-    githubLink: "https://github.com/merveartut/TaskManagerBackend",
+    technologies: ["React.js", "Spring Boot", "Spring Security", "PostgreSQL"],
+    githubLink: "https://github.com/merveartut/TaskManager",
     images: [],
   },
+
   {
     title: "Shopping Cart",
     description:

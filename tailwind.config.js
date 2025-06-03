@@ -6,7 +6,11 @@ export default {
       fontFamily: {
         "roboto-mono": ['"Roboto Mono"', "monospace"],
         "source-code-pro": ['"Source Code Pro"', "monospace"],
-        roboto: ['"Roboto"'],
+        rubik: ['"Rubik", "monospace"'],
+        roboto: ['"Roboto", "monospace'],
+        zain: ['"Zain", "monospace"'],
+        jura: ['"Jura", "monospace"'],
+        titillium: ['"Titillium Web']
       },
     },
   },

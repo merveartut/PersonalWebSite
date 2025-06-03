@@ -12,9 +12,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@fontsource/titillium-web": "^5.2.5",
     "@mui/icons-material": "^7.1.0",
     "@mui/joy": "^5.0.0-beta.52",
-    "@mui/material": "^7.1.0",
+    "@mui/lab": "^7.0.0-beta.13",
+    "@mui/material": "^7.1.1",
     "@reduxjs/toolkit": "^2.8.2",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.12.0",

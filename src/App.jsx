@@ -10,6 +10,7 @@ import ContactPage from "./pages/ContactPage";
 import { AboutPage } from "./pages/AboutPage";
 import NavBar from "./components/NavBar";
 import { SkillsPage } from "./pages/SkillsPage";
+import { ExperiencePage } from "./pages/ExperiencePage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/skills" element={<SkillsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/works" element={<WorkPage />} />
+            <Route path="/experience" element={<ExperiencePage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
