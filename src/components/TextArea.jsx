@@ -14,7 +14,7 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
 import styles from "./TextArea.module.css";
 
-function TextArea({ setValue }) {
+function TextArea({ setValue, placeholder }) {
   const [italic, setItalic] = React.useState(false);
   const [fontWeight, setFontWeight] = React.useState("normal");
   const [anchorEl, setAnchorEl] = React.useState(null); // Fixed: Removed type annotation
@@ -22,7 +22,7 @@ function TextArea({ setValue }) {
   return (
     <FormControl sx={{ width: "100%", minWidth: 0 }}>
       <Textarea
-        placeholder="Your message"
+        placeholder={placeholder}
         name="message"
         minRows={3}
         className={styles.textArea}

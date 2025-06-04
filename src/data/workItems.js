@@ -5,6 +5,7 @@ const workItems = [
       "An e-commerce application featuring product listings, shopping cart functionality, and a checkout process.",
     technologies: ["React.js", "Spring Boot", "Spring Security", "PostgreSQL"],
     githubLink: "https://github.com/merveartut/TaskManager",
+    statusDone: true,
     images: [],
   },
   {
@@ -13,6 +14,7 @@ const workItems = [
       "An e-commerce application featuring product listings, shopping cart functionality, and a checkout process.",
     technologies: ["React.js", "Spring Boot", "Spring Security", "PostgreSQL"],
     githubLink: "https://github.com/merveartut/TaskManager",
+    statusDone: false,
     images: [],
   },
 
@@ -21,6 +23,7 @@ const workItems = [
     description:
       "An e-commerce application featuring product listings, shopping cart functionality, and a checkout process.",
     technologies: ["Vue.js"],
+    statusDone: true,
     githubLink: "https://github.com/merveartut/shopping-cart",
     images: [
       {

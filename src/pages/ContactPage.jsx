@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import styles from "./ContactPage.module.css";
-import { TextField } from "@mui/material";
-import Textarea from "@mui/joy/Textarea";
+import { useState } from "react";
 import TextArea from "../components/TextArea";
 import TextInput from "../components/TextInput";
 import emailjs from "emailjs-com";
 import { useMediaQuery } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EmailIcon from "@mui/icons-material/Email";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import { useTranslation } from "react-i18next";
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ function ContactPage() {
   const [successMessage, setSuccessMessage] = useState("");
   const isAnyFieldNull = !formData.name || !formData.email || !formData.message;
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const { t } = useTranslation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +42,7 @@ function ContactPage() {
           "-I_xrU8I1eCHqk6xl"
         )
         .then(
-          (response) => {
+          () => {
             setSuccessMessage(
               "Yay! Your message just landed 🚀. We’ll get back to you soon—stay tuned!"
             );
@@ -54,21 +57,20 @@ function ContactPage() {
   };
   return (
     <div
-      className={`flex flex-col w-full h-full items-center justify-center px-4 ${
-        isSmallScreen ? "py-10" : "ml-[160px] py-20"
-      }`}
+      className={`flex flex-col w-full h-full items-center justify-center px-4 ${isSmallScreen ? "py-10" : "ml-[160px] py-20"
+        }`}
     >
       {!successMessage && (
         <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
           <div className="p-6 rounded-lg">
             <h3 className="text-xl font-bold mb-4 font-roboto-mono">
-              Get in touch
+              {t("getintouch")}
             </h3>
 
             <div className="mb-4">
               <TextInput
                 name={"name"}
-                label={"Who are u ?"}
+                label={t("whoru")}
                 value={formData.name}
                 setValue={handleChange}
               />
@@ -79,13 +81,14 @@ function ContactPage() {
                 name="email"
                 value={formData.email}
                 setValue={handleChange}
-                label={"Your email"}
+                label={t("emailInput")}
               />
             </div>
 
             <div className="mb-4">
               <TextArea
                 name="message"
+                placeholder={t("message")}
                 value={formData.message}
                 setValue={handleChange}
                 className="w-full max-w-full resize-none box-border"
@@ -96,13 +99,12 @@ function ContactPage() {
               <button
                 type="submit"
                 disabled={isAnyFieldNull}
-                className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-                  isAnyFieldNull
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:bg-blue-600"
-                }`}
+                className={`bg-blue-500 text-white px-4 py-2 rounded-md ${isAnyFieldNull
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-blue-600"
+                  }`}
               >
-                Send
+                {t("send")}
               </button>
             </div>
           </div>
@@ -111,6 +113,20 @@ function ContactPage() {
       {successMessage && (
         <p className="text-green-500 font-roboto mt-6">{successMessage}</p>
       )}
+      <div className="flex gap-6 mt-10">
+        <a href="https://github.com/merveartut" target="_blank" rel="noopener noreferrer">
+          <GitHubIcon className="text-gray-600 hover:text-black transition-transform hover:scale-110" fontSize="large" />
+        </a>
+        <a href="https://linkedin.com/in/merveartut" target="_blank" rel="noopener noreferrer">
+          <LinkedInIcon className="text-gray-600 hover:text-blue-700 transition-transform hover:scale-110" fontSize="large" />
+        </a>
+        <a href="https://www.instagram.com/merveartut/">
+          <InstagramIcon className="text-gray-600 hover:text-fuchsia-600 transition-transform hover:scale-110" fontSize="large" />
+        </a>
+        <a href="mailto:merveartuttt@gmail.com">
+          <EmailIcon className="text-gray-600 hover:text-red-500 transition-transform hover:scale-110" fontSize="large" />
+        </a>
+      </div>
     </div>
   );
 }
