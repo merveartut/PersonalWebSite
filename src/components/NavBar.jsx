@@ -18,14 +18,15 @@ import trImg from "../assets/tr.png";
 import enImg from "../assets/en.png";
 import nazar from "../assets/nazar.png"
 import daisy from "../assets/daisy.png"
-import flower from "../assets/flower.png"
-import sunflower from "../assets/sunflower.png"
+import logo from "../assets/log.png"
 
 function NavBar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [sparkles, setSparkles] = useState([]);
   const location = useLocation(); // Get the current route from react-router
+  const currentHash = location.hash;
+
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const { t, i18n } = useTranslation();
@@ -33,10 +34,10 @@ function NavBar() {
 
   const navigate = useNavigate();
   const menuItems = [
-    { path: "/home#about", key: "about" },
-    { path: "/home#experience", key: "experience" },
-    { path: "/home#works", key: "works" },
-    { path: "/home#contact", key: "contact" },
+    { path: "/#about", key: "about" },
+    { path: "/#experience", key: "experience" },
+    { path: "/#works", key: "works" },
+    { path: "/#contact", key: "contact" },
   ];
 
   const handleLanguageChange = (event) => {
@@ -45,42 +46,47 @@ function NavBar() {
     i18n.changeLanguage(newLanguage);
   };
 
-  const currentPath = location.pathname.toLowerCase() + location.hash;
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   // Update selected index based on the current route
   const getSelectedIndex = () => {
-    if (
-      currentPath.includes("#about") ||
-      currentPath === "/home" ||
-      currentPath === "/"
-    )
+    if (currentHash === "#about" || currentHash === "" || currentHash === "#")
       return 0;
-    if (currentPath.includes("#experience")) return 1;
-    if (currentPath.includes("#works")) return 2;
-    if (currentPath.includes("#contact")) return 3;
+    if (currentHash === "#experience") return 1;
+    if (currentHash === "#works") return 2;
+    if (currentHash === "#contact") return 3;
     return -1;
   };
 
-  const selectedIndex = getSelectedIndex(); // Get selected index based on current path
+  const selectedIndex = getSelectedIndex();
 
-  // Handle menu item click
   const handleClickItem = (page, index, event) => {
     const [path, hash] = page.split("#");
 
-    navigate(path + (hash ? `#${hash}` : ""));
-
-    if (hash) {
+    if (path === "/" && hash) {
+      navigate(`#${hash}`);
       const element = document.getElementById(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(page);
     }
 
     if (isMobile) setDrawerOpen(false);
   };
-
   const drawerContent = (
-    <List className="h-full max-w-fit flex flex-col justify-center  text-blue-800 font-source-code-pro gap-24">
+    <List className="h-full max-w-fit flex flex-col justify-center  text-blue-800 font-source-code-pro gap-16">
+      <div className="absolute top-8 left-2">
+        <img src={logo} width="80"></img>
+      </div>
+
       {menuItems.map(({ path, key }, index) => (
         <ListItem
           key={key}
@@ -93,7 +99,7 @@ function NavBar() {
           <div className="flex flex-row items-center w-full gap-2">
             <ListItemText
               primary={
-                <span className="relative group font-rubik">
+                <span className={`relative group font-rubik ${selectedIndex === index ? "font-bold" : ""}`}>
                   {t(key)}
 
                 </span>
@@ -126,7 +132,7 @@ function NavBar() {
                   src={flagSrc}
                   alt={selected}
                   style={{
-                    width: 30,
+                    width: 24,
                     height: 20,
                     verticalAlign: "middle",
                   }}
@@ -141,7 +147,7 @@ function NavBar() {
                 src={enImg}
                 alt="English"
                 style={{
-                  width: 20,
+                  width: 18,
                   height: 14,
                   marginRight: 8,
                   verticalAlign: "middle",

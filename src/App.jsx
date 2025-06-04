@@ -21,7 +21,7 @@ function App() {
         <main className="flex-1 flex items-center h-screen justify-center overflow-x-hidden ">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/home" element={<AboutPage />} />
             <Route path="/skills" element={<SkillsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/works" element={<WorkPage />} />

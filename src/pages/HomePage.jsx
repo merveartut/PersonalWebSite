@@ -20,11 +20,16 @@ function HomePage() {
   const [contactRef, contactInView] = useInView({ threshold: 0.6 });
 
   useEffect(() => {
-    if (aboutInView) navigate("/home#about", { replace: true });
-    else if (experienceInView) navigate("/home#experience", { replace: true });
-    else if (worksInView) navigate("/home#works", { replace: true });
-    else if (contactInView) navigate("/home#contact", { replace: true });
-  }, [aboutInView, worksInView, experienceInView, contactInView, navigate]);
+    if (aboutInView && window.location.hash !== "#about") {
+      window.history.replaceState(null, "", "#about");
+    } else if (experienceInView && window.location.hash !== "#experience") {
+      window.history.replaceState(null, "", "#experience");
+    } else if (worksInView && window.location.hash !== "#works") {
+      window.history.replaceState(null, "", "#works");
+    } else if (contactInView && window.location.hash !== "#contact") {
+      window.history.replaceState(null, "", "#contact");
+    }
+  }, [aboutInView, experienceInView, worksInView, contactInView]);
 
   return (
     <div className="w-full h-full snap-y snap-mandatory scroll-smooth">

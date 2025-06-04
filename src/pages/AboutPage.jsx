@@ -8,7 +8,7 @@ export const AboutPage = () => {
     <div className="w-full min-h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center px-4 text-black p-10 snap-start">
 
 
-      <div className="flex flex-col gap-12 items-center md:items-start mb-10 md:mb-0">
+      <div className="flex flex-col gap-8 items-center md:items-start mb-10 md:mb-0">
         <div className="flex flex-col gap-4">
           <span className="font-rubik text-xl">
             MERVE ARTUT
