@@ -3,13 +3,13 @@ import styles from "./WorkPage.module.css";
 import Modal from "../components/ModalContainer";
 import ImageSlider from "../components/ImageSlider";
 import workItems from "../data/workItems";
-import { useMediaQuery } from "@mui/material";
 import magnifyIcon from "../assets/search.png";
 
 function WorkPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
-  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const [showProgressModal, setShowProgressModal] = useState(false);
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImages([]);
@@ -18,7 +18,7 @@ function WorkPage() {
     setSelectedImages(images);
     setIsModalOpen(true);
   };
-
+  console.log(magnifyIcon, "mmmm")
   return (
     <div
       className={`flex flex-wrap min-h-screen h-full  gap-8 items-center justify-center p-10 snap-start w-full max-w-full px-4 py-5 `}
@@ -27,15 +27,29 @@ function WorkPage() {
       {workItems.map((item, index) => (
         <div
           key={index}
-          className="rounded-lg shadow-md border-[1px] border-stone-300 p-6 w-[320px] h-[420px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300"
+          onClick={() => {
+            if (!item.statusDone) {
+              setShowProgressModal(true);
+            } else {
+              window.open(item.link, "_blank");
+            }
+          }}
+          className="rounded-lg shadow-md border-[1px] border-stone-300 p-6 w-[320px] h-[420px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
           style={{
             minWidth: 0,
-            cursor: `url(${magnifyIcon}) 16 16, auto`, // Custom cursor
           }}
         >
           <div className="flex flex-col gap-2 w-full flex-grow">
             <h3 className="text-xl font-rubik">{item.title}</h3>
             <p className="text-gray-700 font-roboto">{item.description}</p>
+
+            {/* 🟡 Progress Warning */}
+            {!item.statusDone && (
+              <p className="text-yellow-600 font-semibold text-sm">
+                🚧 Work in Progress
+              </p>
+            )}
+
             <strong
               onClick={() => window.open(item.githubLink, "_blank")}
               className="cursor-pointer text-blue-600 hover:underline font-roboto-mono"
@@ -60,13 +74,22 @@ function WorkPage() {
             )}
           </div>
 
+
+
           {/* Move Modal outside the map or keep here if modal tied to each item */}
-          <Modal isOpen={isModalOpen} closeModal={closeModal}>
+          <Modal Modal isOpen={isModalOpen} closeModal={closeModal} >
             <ImageSlider slides={selectedImages} />
           </Modal>
+        </div >
+      ))
+      }
+      <Modal isOpen={showProgressModal} closeModal={() => setShowProgressModal(false)} >
+        <div className="p-4 text-center">
+          <h2 className="text-xl font-bold mb-2">🚧 Work in Progress</h2>
+          <p className="text-gray-700">This project is not yet live. Please check back later!</p>
         </div>
-      ))}
-    </div>
+      </Modal>
+    </div >
   );
 }
 
