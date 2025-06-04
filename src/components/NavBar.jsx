@@ -83,7 +83,7 @@ function NavBar() {
   };
   const drawerContent = (
     <List className="h-full max-w-fit flex flex-col justify-center  text-blue-800 font-source-code-pro gap-16">
-      <div className="absolute top-8 left-2">
+      <div className="absolute top-8 left-2 cursor-pointer" onClick={() => navigate("/")}>
         <img src={logo} width="80"></img>
       </div>
 
