@@ -1,38 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
+  Box,
+  IconButton,
   Drawer,
   List,
   ListItem,
   ListItemText,
-  IconButton,
   useMediaQuery,
-  Select,
+  Menu,
   MenuItem,
-  FormControl,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate, useLocation } from "react-router-dom";
-import Sparkle from "./Sparkle";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import trImg from "../assets/tr.png";
 import enImg from "../assets/en.png";
-import nazar from "../assets/nazar.png"
-import daisy from "../assets/daisy.png"
-import logo from "../assets/log.png"
+import logo from "../assets/log.png";
 
-function NavBar() {
+function NavBar({ activeSection }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [sparkles, setSparkles] = useState([]);
-  const location = useLocation(); // Get the current route from react-router
-  const currentHash = location.hash;
-
+  const [anchorEl, setAnchorEl] = useState(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
-
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language);
-
   const navigate = useNavigate();
+
   const menuItems = [
     { path: "/#about", key: "about" },
     { path: "/#experience", key: "experience" },
@@ -40,37 +32,23 @@ function NavBar() {
     { path: "/#contact", key: "contact" },
   ];
 
-  const handleLanguageChange = (event) => {
-    const newLanguage = event.target.value;
-    setLanguage(newLanguage);
-    i18n.changeLanguage(newLanguage);
+  const handleLanguageMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentHash(window.location.hash);
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  // Update selected index based on the current route
-  const getSelectedIndex = () => {
-    if (currentHash === "#about" || currentHash === "" || currentHash === "#")
-      return 0;
-    if (currentHash === "#experience") return 1;
-    if (currentHash === "#works") return 2;
-    if (currentHash === "#contact") return 3;
-    return -1;
+  const handleLanguageMenuClose = () => {
+    setAnchorEl(null);
   };
 
-  const selectedIndex = getSelectedIndex();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    handleLanguageMenuClose();
+  };
 
-  const handleClickItem = (page, index, event) => {
+  const selectedIndex = menuItems.findIndex(item => item.key === activeSection);
+
+  const handleClickItem = (page, index) => {
     const [path, hash] = page.split("#");
-
     if (path === "/" && hash) {
       navigate(`#${hash}`);
       const element = document.getElementById(hash);
@@ -78,142 +56,111 @@ function NavBar() {
     } else {
       navigate(page);
     }
-
     if (isMobile) setDrawerOpen(false);
   };
-  const drawerContent = (
-    <List className="h-full max-w-fit flex flex-col justify-center  text-blue-800 font-source-code-pro gap-16">
-      <div className="absolute top-8 left-2 cursor-pointer" onClick={() => navigate("/")}>
-        <img src={logo} width="80"></img>
-      </div>
-
-      {menuItems.map(({ path, key }, index) => (
-        <ListItem
-          key={key}
-          className={`cursor-pointer ${selectedIndex === index ? "text-blue-800 font-bold" : ""
-            } ${hoveredIndex === index ? "translate-x-1" : ""}`}
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
-          onClick={(e) => handleClickItem(path, index, e)}
-        >
-          <div className="flex flex-row items-center w-full gap-2">
-            <ListItemText
-              primary={
-                <span className={`relative group font-rubik ${selectedIndex === index ? "font-bold" : ""}`}>
-                  {t(key)}
-
-                </span>
-              }
-            />
-            {selectedIndex === index && <img src={daisy} width={16}></img>}
-          </div>
-
-        </ListItem>
-      ))}
-      <div className="absolute bottom-10 left-5">
-        <FormControl>
-          <Select
-            value={language}
-            onChange={handleLanguageChange}
-            variant="standard"
-            sx={{
-              // Remove underline and padding so only the flag shows
-              "&.MuiInputBase-root:before, &.MuiInputBase-root:after": {
-                borderBottom: "none !important",
-              },
-              padding: 0,
-              minWidth: 0,
-              width: "auto",
-            }}
-            renderValue={(selected) => {
-              const flagSrc = selected === "en" ? enImg : trImg;
-              return (
-                <img
-                  src={flagSrc}
-                  alt={selected}
-                  style={{
-                    width: 24,
-                    height: 20,
-                    verticalAlign: "middle",
-                  }}
-                />
-              );
-            }}
-            IconComponent={() => null}
-            size="small"
-          >
-            <MenuItem value="en">
-              <img
-                src={enImg}
-                alt="English"
-                style={{
-                  width: 18,
-                  height: 14,
-                  marginRight: 8,
-                  verticalAlign: "middle",
-                }}
-              />
-              English
-            </MenuItem>
-            <MenuItem value="tr">
-              <img
-                src={trImg}
-                alt="Türkçe"
-                style={{
-                  width: 20,
-                  height: 14,
-                  marginRight: 8,
-                  verticalAlign: "middle",
-                }}
-              />
-              Türkçe
-            </MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-    </List>
-  );
 
   return (
-    <>
-      {isMobile ? (
-        <>
-          {/* Prevent horizontal scrolling on mobile */}
-          <div className="fixed overflow-x-hidden bg-transparent z-[1300] p-2 rounded-br-lg">
-            <IconButton
-              edge="start"
-              color="oklch(92.3% 0.003 48.717)"
-              aria-label="menu"
-              onClick={() => setDrawerOpen(!drawerOpen)}
-              size="large"
-            >
-              <MenuIcon className="text-stone-200" />
-            </IconButton>
-          </div>
+    <div className="fixed top-0 left-0 w-full bg-zinc-50 z-30 shadow-sm">
+      <div className="flex items-center justify-between px-4 py-2">
+        {/* Logo */}
+        <div className="cursor-pointer" onClick={() => navigate("/")}>
+          <img src={logo} width="60" alt="Logo" />
+        </div>
 
-          <Drawer
-            anchor="left"
-            open={drawerOpen}
-            onClose={() => setDrawerOpen(false)}
-            PaperProps={{
-              style: {
-                maxWidth: "120px", // Optional: Restrict max width
-              },
+        {/* Menu items */}
+        <div className="hidden md:flex gap-8 items-center text-blue-800 font-source-code-pro">
+          {menuItems.map(({ path, key }, index) => (
+            <div
+              key={key}
+              onClick={() => handleClickItem(path, index)}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className={`cursor-pointer flex items-center gap-1 transition-all duration-200
+                ${hoveredIndex === index ? "translate-y-[-1px]" : ""}
+              `}
+            >
+              <span className="relative font-rubik">
+                {selectedIndex === index && (
+                  <span className="absolute inset-0 -rotate-12 bg-blue-300 opacity-30 px-4 rounded pointer-events-none z-0"></span>
+                )}
+                <span className="relative z-10">{t(key)}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Language selector */}
+        <div>
+          <IconButton onClick={handleLanguageMenuOpen} size="small" sx={{ p: 0 }}>
+            <img
+              src={i18n.language === "en" ? enImg : trImg}
+              alt={i18n.language}
+              width={24}
+              height={16}
+              style={{ objectFit: "cover" }}
+            />
+          </IconButton>
+
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleLanguageMenuClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
             }}
           >
-            {drawerContent}
-          </Drawer>
-        </>
-      ) : (
-        <div className="w-fit h-screen  fixed top-0 left-0">
-          {drawerContent}
+            <MenuItem onClick={() => changeLanguage("en")}>
+              <Box display="flex" alignItems="center" gap={1}>
+                <img src={enImg} alt="English" width={24} height={16} />
+                <span>English</span>
+              </Box>
+            </MenuItem>
+            <MenuItem onClick={() => changeLanguage("tr")}>
+              <Box display="flex" alignItems="center" gap={1}>
+                <img src={trImg} alt="Türkçe" width={24} height={16} />
+                <span>Türkçe</span>
+              </Box>
+            </MenuItem>
+          </Menu>
         </div>
-      )}
-      {/* Sparkles */}
-      {sparkles.map(({ id, x, y }) => (
-        <Sparkle key={id} x={x} y={y} />
-      ))}
-    </>
+
+        {/* Mobile menu button */}
+        {isMobile && (
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => setDrawerOpen(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+      </div>
+
+      {/* Mobile drawer */}
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <List>
+          {menuItems.map(({ path, key }, index) => (
+            <ListItem
+              button
+              key={key}
+              onClick={() => handleClickItem(path, index)}
+            >
+              <ListItemText primary={t(key)} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </div>
   );
 }
 

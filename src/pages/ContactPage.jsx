@@ -8,6 +8,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { useTranslation } from "react-i18next";
+import letter from "../assets/letter.png"
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -60,53 +61,59 @@ function ContactPage() {
       className={`flex flex-col w-full h-full items-center justify-center px-4 ${isSmallScreen ? "py-10" : "ml-[160px] py-20"
         }`}
     >
+      <img src={letter} className="absolute !mr-[800px]" width={400}></img>
       {!successMessage && (
         <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
-          <div className="p-6 rounded-lg">
-            <h3 className="text-xl font-bold mb-4 font-roboto-mono">
+
+          <div className="p-6 rounded-lg flex gap-6 flex-col">
+
+            <span className="text-4xl font-bold mb-4 font-roboto-mono">
               {t("getintouch")}
-            </h3>
+            </span>
 
-            <div className="mb-4">
-              <TextInput
-                name={"name"}
-                label={t("whoru")}
-                value={formData.name}
-                setValue={handleChange}
-              />
+            <div className="flex flex-col gap-2">
+              <div className="mb-4">
+                <TextInput
+                  name={"name"}
+                  label={t("whoru")}
+                  value={formData.name}
+                  setValue={handleChange}
+                />
+              </div>
+
+              <div className="mb-4">
+                <TextInput
+                  name="email"
+                  value={formData.email}
+                  setValue={handleChange}
+                  label={t("emailInput")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <TextArea
+                  name="message"
+                  placeholder={t("message")}
+                  value={formData.message}
+                  setValue={handleChange}
+                  className="w-full max-w-full resize-none box-border"
+                />
+              </div>
+
+              <div className="text-center">
+                <button
+                  type="submit"
+                  disabled={isAnyFieldNull}
+                  className={`bg-blue-500 text-white px-4 py-2 rounded-md ${isAnyFieldNull
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-blue-600"
+                    }`}
+                >
+                  {t("send")}
+                </button>
+              </div>
             </div>
 
-            <div className="mb-4">
-              <TextInput
-                name="email"
-                value={formData.email}
-                setValue={handleChange}
-                label={t("emailInput")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <TextArea
-                name="message"
-                placeholder={t("message")}
-                value={formData.message}
-                setValue={handleChange}
-                className="w-full max-w-full resize-none box-border"
-              />
-            </div>
-
-            <div className="text-center">
-              <button
-                type="submit"
-                disabled={isAnyFieldNull}
-                className={`bg-blue-500 text-white px-4 py-2 rounded-md ${isAnyFieldNull
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-blue-600"
-                  }`}
-              >
-                {t("send")}
-              </button>
-            </div>
           </div>
         </form>
       )}

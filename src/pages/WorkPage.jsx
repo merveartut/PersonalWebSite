@@ -3,7 +3,9 @@ import styles from "./WorkPage.module.css";
 import Modal from "../components/ModalContainer";
 import ImageSlider from "../components/ImageSlider";
 import workItems from "../data/workItems";
-import magnifyIcon from "../assets/search.png";
+import {
+  Chip,
+} from "@mui/material";
 
 function WorkPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +20,6 @@ function WorkPage() {
     setSelectedImages(images);
     setIsModalOpen(true);
   };
-  console.log(magnifyIcon, "mmmm")
   return (
     <div
       className={`flex flex-wrap min-h-screen h-full  gap-8 items-center justify-center p-10 snap-start w-full max-w-full px-4 py-5 `}
@@ -34,14 +35,14 @@ function WorkPage() {
               window.open(item.link, "_blank");
             }
           }}
-          className="rounded-lg shadow-md border-[1px] border-stone-300 p-6 w-[320px] h-[420px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+          className="rounded-lg shadow-md border-[1px] bg-zinc-50 bg-opacity-80 border-blue-900 p-6 w-[320px] h-[360px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
           style={{
             minWidth: 0,
           }}
         >
           <div className="flex flex-col gap-2 w-full flex-grow">
-            <h3 className="text-xl font-rubik">{item.title}</h3>
-            <p className="text-gray-700 font-roboto">{item.description}</p>
+            <h3 className="text-xl font-rubik ">{item.title}</h3>
+            <p className="font-roboto ">{item.description}</p>
 
             {/* 🟡 Progress Warning */}
             {!item.statusDone && (
@@ -56,23 +57,14 @@ function WorkPage() {
             >
               Open GitHub
             </strong>
-            <p className={styles.technologies}>
-              <strong>Technologies:</strong> {item.technologies.join(", ")}
-            </p>
+            <div className="flex flex-row gap-2 flex-wrap">
+              {item.technologies.map((tech) => (
+                <Chip label={tech} className="!bg-blue-900 !text-white !font-roboto !font-medium"></Chip>
+              ))}
+            </div>
           </div>
 
-          <div className="flex-shrink-0 cursor-pointer">
-            {item.images.length > 0 ? (
-              <img
-                src={item.images[0].url}
-                alt={item.title}
-                className={`${styles.thumbnail} rounded-md shadow-sm hover:scale-105 transition-transform duration-300`}
-                onClick={() => openModal(item.images)}
-              />
-            ) : (
-              <div className="w-[200px]" />
-            )}
-          </div>
+
 
 
 

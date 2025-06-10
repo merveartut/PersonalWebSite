@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import profile from "../assets/profile.jpeg";
+import profile from "../assets/profile.png";
 
 export const AboutPage = () => {
   const { t } = useTranslation();
@@ -21,14 +21,14 @@ export const AboutPage = () => {
         </p>
       </div>
 
-      <div className="absoulte flex justify-center relative">
-        <div className="relative w-[200px] h-[300px] md:w-[250px] md:h-[350px] lg:w-[300px] lg:h-[400px]">
+      <div className=" flex justify-center mb-[460px] ml-[60px]">
+        <div className="absolute w-[200px] h-[300px] md:w-[250px] md:h-[350px] lg:w-[300px] lg:h-[400px]">
           <img
             src={profile}
             alt="Profile"
-            className="rounded-xl object-cover w-full h-full"
+            className="rounded-xl object-cover w-full h-full absolute  "
           />
-          <div className="absolute -bottom-4 -right-4 w-full h-full border-4 border-blue-800 rounded-xl"></div>
+          <div className="absolute -bottom-4 -right-4 w-full h-full"></div>
         </div>
       </div>
     </div>

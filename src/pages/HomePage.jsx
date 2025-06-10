@@ -9,8 +9,9 @@ import { AboutPage } from "./AboutPage";
 import WorkPage from "./WorkPage";
 import { SkillsPage } from "./SkillsPage";
 import { ExperiencePage } from "./ExperiencePage";
+import bg from "../assets/ex_bg_3.jpg"
 
-function HomePage() {
+function HomePage({ setActiveSection }) {
 
   const navigate = useNavigate();
 
@@ -20,13 +21,17 @@ function HomePage() {
   const [contactRef, contactInView] = useInView({ threshold: 0.6 });
 
   useEffect(() => {
-    if (aboutInView && window.location.hash !== "#about") {
+    if (aboutInView) {
+      setActiveSection("about");
       window.history.replaceState(null, "", "#about");
-    } else if (experienceInView && window.location.hash !== "#experience") {
+    } else if (experienceInView) {
+      setActiveSection("experience");
       window.history.replaceState(null, "", "#experience");
-    } else if (worksInView && window.location.hash !== "#works") {
+    } else if (worksInView) {
+      setActiveSection("works");
       window.history.replaceState(null, "", "#works");
-    } else if (contactInView && window.location.hash !== "#contact") {
+    } else if (contactInView) {
+      setActiveSection("contact");
       window.history.replaceState(null, "", "#contact");
     }
   }, [aboutInView, experienceInView, worksInView, contactInView]);
@@ -37,7 +42,7 @@ function HomePage() {
       <section
         id="about"
         ref={aboutRef}
-        className="w-full !min-h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center  text-black p-10 !py-[32px] snap-start"
+        className="w-full !min-h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center bg-zinc-50  text-black p-10 !py-[32px] snap-start"
       >
         <AboutPage />
       </section>
@@ -45,7 +50,7 @@ function HomePage() {
       <section
         id="experience"
         ref={experienceRef}
-        className="bg-zinc-100 min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start"
+        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-[#f2eef1]"
       >
         <ExperiencePage />
       </section>
@@ -53,7 +58,7 @@ function HomePage() {
       <section
         id="works"
         ref={worksRef}
-        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start"
+        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-zinc-50"
       >
         <WorkPage />
       </section>
@@ -62,7 +67,7 @@ function HomePage() {
       <section
         id="contact"
         ref={contactRef}
-        className="bg-zinc-100 min-h-screen flex flex-col items-center justify-center bg-gradient-to-b  snap-start"
+        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b  snap-start bg-[#f0e6ee]"
       >
         <ContactPage />
       </section>

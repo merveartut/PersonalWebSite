@@ -1,20 +1,24 @@
 import React from "react";
 import {
-    Timeline,
-    TimelineItem,
-    TimelineSeparator,
-    TimelineConnector,
-    TimelineContent,
-    TimelineDot,
-    TimelineOppositeContent,
-} from "@mui/lab";
-import { Typography, Paper } from "@mui/material";
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Typography,
+    Chip,
+    Divider,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { OpenInNewRounded } from "@mui/icons-material";
+import { LocationOnRounded } from "@mui/icons-material";
 
 const experiences = [
     {
-        title: "Software Developer (React, Micro Frontend, Spring Boot)",
+        title: "Software Developer",
         company: "SGK (Sosyal Güvenlik Kurumu)",
         period: "July 11, 2024 – Present",
+        url: "sgk.gov.tr",
+        link: "https://www.sgk.gov.tr/Home/Index2/",
+        techs: ["React", "Spring Boot", "Storybook", "Jest", "Figma"],
         description: [
             "Participate in new front-end projects for SGK systems.",
             "Worked with Context management, Micro Front-end, Redux, Formik, Yup, Axios.",
@@ -22,9 +26,12 @@ const experiences = [
         ],
     },
     {
-        title: "Full Stack Developer (VueJS, React, Django)",
+        title: "Full Stack Developer",
         company: "Turboard (E-Kalite Yazılım)",
         period: "Nov 1, 2022 – July 8, 2024",
+        url: "turboard.com",
+        link: "https://www.turboard.com/",
+        techs: ["Vue.js", "React", "Django", "Storybook", "Figma"],
         description: [
             "Designed and implemented components for the Turboard app.",
             "Resolved issues in Django backend.",
@@ -35,6 +42,9 @@ const experiences = [
         title: "Intern (Full Stack Developer)",
         company: "Turboard (E-Kalite Yazılım)",
         period: "Aug, 2022 – Sep, 2022",
+        url: "turboard.com",
+        link: "https://www.turboard.com/",
+        techs: ["Vue.js", "React", "Django", "Storybook", "Figma"],
         description: [
             "Fixed bugs in Django backend and VueJS frontend.",
             "Learned to operate the Turboard app.",
@@ -44,6 +54,9 @@ const experiences = [
         title: "Intern (Full Stack Developer)",
         company: "Medyasoft IT Group",
         period: "July, 2021 – Aug, 2021",
+        url: "medyasoft.com.tr",
+        link: "https://medyasoft.com.tr/",
+        techs: ["Angular", ".NET"],
         description: [
             "Designed and implemented web apps using .NET, Angular, and PostgreSQL based on client requests.",
         ],
@@ -52,37 +65,52 @@ const experiences = [
 
 export const ExperiencePage = () => {
     return (
-        <div className=" w-full min-h-screen snap-start p-8 max-w-5xl mx-auto bg-zinc-100">
-            <Timeline position="alternate">
-                {experiences.map((exp, idx) => (
-                    <TimelineItem key={idx} sx={{ mb: 4 }}>
-                        <TimelineOppositeContent className="text-gray-500 text-sm">
-                            <span className="text-md font-roboto">{exp.period}</span>
-                        </TimelineOppositeContent>
-                        <TimelineSeparator>
-                            <TimelineDot sx={{
-                                backgroundColor: '#7c3aed', // your custom hex color
-                            }} />
-                            {idx < experiences.length - 1 && <TimelineConnector sx={{ width: "1px" }} />}
-                        </TimelineSeparator>
-                        <TimelineContent>
-                            <div elevation={3} className="p-4 rounded-lg border-[1px] border-stone-300 bg-transparent  justify-start flex flex-col hover:scale-105 hover:shadow-2xl transition-transform duration-300">
-                                <span variant="h6" className=" font-rubik">
-                                    {exp.title}
-                                </span>
-                                <span className="italic text-gray-600">
-                                    {exp.company}
-                                </span>
-                                <ul className="list-disc list-inside mt-2 text-gray-700 text-sm">
-                                    {exp.description.map((item, i) => (
-                                        <li className="font-roboto" key={i}>{item}</li>
-                                    ))}
-                                </ul>
+        <div className="w-full min-h-screen p-6 gap-6 max-w-4xl mx-auto flex flex-col justify-center bg-transparent">
+
+            <div className="flex flex-col gap-2">
+                {experiences.map((exp, index) => (
+                    <Accordion key={index} defaultExpanded={index === 0} style={{ border: "1px", borderRadius: "10px" }} className="p-4">
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />} className="bg-purple-100">
+                            <div className="flex flex-col w-full">
+                                <div className="flex flex-row items-center justify-between w-full">
+                                    <Typography className="font-medium text-purple-900">{exp.title} @ {exp.company}</Typography>
+                                    <Typography variant="body2" className="text-gray-600 font-medium !mr-[24px] hidden sm:block">
+                                        {exp.period}
+                                    </Typography>
+                                </div>
+
+
                             </div>
-                        </TimelineContent>
-                    </TimelineItem>
+                        </AccordionSummary>
+                        <AccordionDetails className="flex flex-col gap-4">
+                            <div className="flex flex-row gap-8  text-violet-800">
+                                <div className="flex flex-row gap-2 items-center">
+                                    <LocationOnRounded className="!w-[20px]"></LocationOnRounded>
+                                    <span className="text-sm" >Ankara, Turkey</span>
+                                </div>
+                                <div className="flex flex-row gap-2 items-center">
+                                    <OpenInNewRounded className="!w-[20px]"></OpenInNewRounded>
+                                    <span className="text-sm cursor-pointer" onClick={() => window.open(exp.link, "_blank")}>{exp.url}</span>
+                                </div>
+                            </div>
+
+                            <ul className="list-disc list-inside text-gray-800 text-sm space-y-1">
+                                {exp.description.map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
+                            </ul>
+
+                            <div className="flex flex-row gap-2 flex-wrap">
+                                {exp.techs.map((tech) => (
+                                    <Chip label={tech} className="!bg-[#6d48d1] !text-white"></Chip>
+                                ))}
+                            </div>
+
+                        </AccordionDetails>
+                    </Accordion>
                 ))}
-            </Timeline>
+            </div>
+
         </div>
     );
-}
+};
