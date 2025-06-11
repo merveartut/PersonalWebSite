@@ -69,12 +69,20 @@ export const ExperiencePage = () => {
         },
     ];
     return (
-        <div className="w-full min-h-screen p-6 gap-6 max-w-4xl mx-auto flex flex-col justify-center bg-transparent">
-
-            <div className="flex flex-col gap-2">
+        <div className="min-h-screen pt-64 w-full max-w-4xl px-4 flex justify-center">
+            <div className="w-full  flex flex-col gap-4">
                 {experiences.map((exp, index) => (
-                    <Accordion key={index} defaultExpanded={index === 0} style={{ border: "1px", borderRadius: "10px" }} className="p-4 dark:bg-zinc-200">
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />} className="bg-purple-100">
+                    <Accordion 
+                    key={index}
+                    defaultExpanded={index === 0} 
+                    style={{ border: "1px", borderRadius: "10px" }} 
+                    className="p-4 dark:bg-zinc-200" 
+                    sx={{
+                        "&::before": {
+                            display: "none",
+                        },
+                    }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />} className="bg-purple-100" >
                             <div className="flex flex-col w-full">
                                 <div className="flex flex-row items-center justify-between w-full">
                                     <Typography className=" text-purple-900 font-rubik !font-bold">{exp.title} @ {exp.company}</Typography>
