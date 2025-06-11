@@ -27,7 +27,7 @@ const workItems = [
     technologies: ["React.js"],
     statusDone: true,
     githubLink: "https://github.com/merveartut/PersonalWebSite",
-    link: "https://personalwebsite-3y36.onrender.com",
+    link: "https://merveartut.com",
     images: [
 
     ],
