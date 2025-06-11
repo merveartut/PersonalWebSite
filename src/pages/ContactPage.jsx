@@ -21,9 +21,9 @@ function ContactPage() {
   const isAnyFieldNull = !formData.name || !formData.email || !formData.message;
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const { t } = useTranslation();
-  const theme = useTheme()
+  const theme = localStorage.getItem("theme")
 
-
+  console.log("ttttjthth", theme)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -64,7 +64,7 @@ function ContactPage() {
       className={`flex flex-col w-full h-full items-center justify-center px-4 ${isSmallScreen ? "py-10" : "ml-[160px] py-20"
         }`}
     >
-      {theme.palette.mode === "light" ? (<img src={letter} className="absolute !mr-[800px]" width={400}></img>) : (<img src={letterDark} className="absolute !mr-[800px]" width={400}></img>)}
+      {theme === "light" ? (<img src={letter} className="absolute !mr-[800px]" width={400}></img>) : (<img src={letterDark} className="absolute !mr-[800px]" width={400}></img>)}
       {!successMessage && (
         <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
 

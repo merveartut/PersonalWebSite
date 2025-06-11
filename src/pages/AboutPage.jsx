@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 
 export const AboutPage = () => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const theme = localStorage.getItem("theme")
   return (
     <div className="w-full min-h-screen flex flex-col md:flex-row items-center justify-center px-4 text-black dark:text-white p-10 snap-start gap-[40px] md:gap-[1px] lg:gap-[1px]">
 
@@ -25,7 +25,7 @@ export const AboutPage = () => {
       {/* Profile Image */}
       <div className="flex justify-center md:justify-start">
         <div className="w-[200px] h-[300px] md:w-[250px] md:h-[350px] lg:w-[300px] lg:h-[400px]">
-          {theme.palette.mode === "light" ? (<img
+          {theme === "light" ? (<img
             src={profile}
             alt="Profile"
             className="rounded-xl object-cover w-full h-full"
