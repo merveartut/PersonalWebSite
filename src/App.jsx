@@ -36,7 +36,6 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage setActiveSection={setActiveSection} />} />
             <Route path="/home" element={<AboutPage setActiveSection={setActiveSection} />} />
-            <Route path="/skills" element={<SkillsPage setActiveSection={setActiveSection} />} />
             <Route path="/about" element={<AboutPage setActiveSection={setActiveSection} />} />
             <Route path="/works" element={<WorkPage setActiveSection={setActiveSection} />} />
             <Route path="/experience" element={<ExperiencePage setActiveSection={setActiveSection} />} />
