@@ -3,17 +3,19 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useInView } from "react-intersection-observer";
+import {
+  useMediaQuery,
+} from "@mui/material";
 
 import ContactPage from "./ContactPage";
 import { AboutPage } from "./AboutPage";
 import WorkPage from "./WorkPage";
 import { SkillsPage } from "./SkillsPage";
 import { ExperiencePage } from "./ExperiencePage";
-import bg from "../assets/ex_bg_3.jpg"
 
 function HomePage({ setActiveSection }) {
 
-  const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const [aboutRef, aboutInView] = useInView({ threshold: 0.6 });
   const [experienceRef, experienceInView] = useInView({ threshold: 0.6 });
@@ -42,7 +44,7 @@ function HomePage({ setActiveSection }) {
       <section
         id="about"
         ref={aboutRef}
-        className="w-full !min-h-screen flex flex-col md:flex-row gap-[60px] items-center justify-center bg-zinc-50  text-black p-10 !py-[32px] snap-start"
+        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center bg-zinc-50  text-black p-10 !py-[32px] snap-start ${isMobile ? "mt-[60px]" : ""}`}
       >
         <AboutPage />
       </section>
@@ -50,7 +52,7 @@ function HomePage({ setActiveSection }) {
       <section
         id="experience"
         ref={experienceRef}
-        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-[#f2eef1]"
+        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-[#f2eef1] dark:bg-slate-800"
       >
         <ExperiencePage />
       </section>
@@ -58,7 +60,7 @@ function HomePage({ setActiveSection }) {
       <section
         id="works"
         ref={worksRef}
-        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-zinc-50"
+        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-zinc-50 dark:bg-zinc-900"
       >
         <WorkPage />
       </section>
@@ -67,7 +69,7 @@ function HomePage({ setActiveSection }) {
       <section
         id="contact"
         ref={contactRef}
-        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b  snap-start bg-[#f0e6ee]"
+        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b  snap-start bg-[#f2eef1] dark:bg-slate-800"
       >
         <ContactPage />
       </section>

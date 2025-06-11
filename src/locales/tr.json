@@ -10,5 +10,19 @@
   "emailInput": "E-posta adresiniz",
   "message": "Buraya mesajınızı girebilirsiniz",
   "send": "Gönder",
-  "getintouch": "Benimle iletişime geçebilirsiniz"
+  "getintouch": "Benimle iletişime geçebilirsiniz",
+  "succeedMessage": "Mesajın başarıyla ulaştı 🚀. En kısa sürede sana geri döneceğim, takipte kal!",
+  "sgkDescription1": "SGK sistemleri için yeni ön yüz projelerinde görev alındı.",
+  "sgkDescription2": "Context yönetimi, Micro Front-end, Redux, Formik, Yup, Axios ile çalışıldı.",
+  "sgkDescription3": "REST API'leri entegre edildi; Postman, Jest, Vitest, Storybook ve Figma gibi araçlar kullanıldı.",
+  "turboardDescription1": "Turboard uygulaması için bileşenler tasarlandı ve geliştirildi.",
+  "turboardDescription2": "Django backend tarafında sorunlar giderildi.",
+  "turboardDescription3": "Vitest ile birim testleri gerçekleştirildi.",
+  "turboardDescription4": "Django backend ve VueJS frontend tarafındaki hatalar düzeltildi.",
+  "turboardDescription5": "Turboard uygulamasının kullanımı öğrenildi.",
+  "medyasoftDescription1": "Müşteri taleplerine göre .NET, Angular ve PostgreSQL kullanarak web uygulamaları geliştirildi ve tasarlandı.",
+  "sgkPeriod": "11 Temmuz 2024 – Devam Ediyor",
+  "turboardPeriod1": "1 Kasım 2022 – 8 Temmuz 2024",
+  "turboardPeriod2": "Ağustos 2022 – Eylül 2022",
+  "medyasoftPeriod": "July, 2021 – Aug, 2021"
 }

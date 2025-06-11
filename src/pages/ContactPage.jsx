@@ -2,13 +2,14 @@ import { useState } from "react";
 import TextArea from "../components/TextArea";
 import TextInput from "../components/TextInput";
 import emailjs from "emailjs-com";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { useTranslation } from "react-i18next";
 import letter from "../assets/letter.png"
+import letterDark from "../assets/letter_dark.png"
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -20,6 +21,8 @@ function ContactPage() {
   const isAnyFieldNull = !formData.name || !formData.email || !formData.message;
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const { t } = useTranslation();
+  const theme = useTheme()
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +48,7 @@ function ContactPage() {
         .then(
           () => {
             setSuccessMessage(
-              "Yay! Your message just landed 🚀. We’ll get back to you soon—stay tuned!"
+              "Yay! Your message just landed 🚀. I’ll get back to you soon—stay tuned!"
             );
             console.log("Message sent successfully!");
           },
@@ -61,13 +64,13 @@ function ContactPage() {
       className={`flex flex-col w-full h-full items-center justify-center px-4 ${isSmallScreen ? "py-10" : "ml-[160px] py-20"
         }`}
     >
-      <img src={letter} className="absolute !mr-[800px]" width={400}></img>
+      {theme.palette.mode === "light" ? (<img src={letter} className="absolute !mr-[800px]" width={400}></img>) : (<img src={letterDark} className="absolute !mr-[800px]" width={400}></img>)}
       {!successMessage && (
         <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
 
           <div className="p-6 rounded-lg flex gap-6 flex-col">
 
-            <span className="text-4xl font-bold mb-4 font-roboto-mono">
+            <span className="text-4xl font-bold mb-4 font-rubik dark:text-white">
               {t("getintouch")}
             </span>
 
@@ -104,9 +107,9 @@ function ContactPage() {
                 <button
                   type="submit"
                   disabled={isAnyFieldNull}
-                  className={`bg-blue-500 text-white px-4 py-2 rounded-md ${isAnyFieldNull
+                  className={`bg-rose-900 dark:bg-blue-800 text-white px-4 py-2 rounded-md ${isAnyFieldNull
                     ? "opacity-50 cursor-not-allowed"
-                    : "hover:bg-blue-600"
+                    : "hover:bg-rose-700 dark:hover:bg-blue-700"
                     }`}
                 >
                   {t("send")}
@@ -118,7 +121,7 @@ function ContactPage() {
         </form>
       )}
       {successMessage && (
-        <p className="text-green-500 font-roboto mt-6">{successMessage}</p>
+        <p className="text-green-500 font-roboto mt-6 w-[300px]">{successMessage}</p>
       )}
       <div className="flex gap-6 mt-10">
         <a href="https://github.com/merveartut" target="_blank" rel="noopener noreferrer">

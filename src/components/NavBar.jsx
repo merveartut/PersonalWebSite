@@ -15,9 +15,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import trImg from "../assets/tr.png";
 import enImg from "../assets/en.png";
+import { ThemeToggleButton } from "./ThemeToggleButton";
 import logo from "../assets/log.png";
+import darkLogo from "../assets/dark_logo.png"
+import { LanguageToggleButton } from "./LanguageToggleButton";
 
-function NavBar({ activeSection }) {
+function NavBar({ activeSection, toggleTheme, theme }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -44,6 +47,7 @@ function NavBar({ activeSection }) {
     i18n.changeLanguage(lng);
     handleLanguageMenuClose();
   };
+  console.log(i18n);
 
   const selectedIndex = menuItems.findIndex(item => item.key === activeSection);
 
@@ -60,15 +64,18 @@ function NavBar({ activeSection }) {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-zinc-50 z-30 shadow-sm">
+    <div className="fixed top-0 left-0 w-full bg-zinc-50 dark:bg-slate-800 z-30 shadow-sm">
       <div className="flex items-center justify-between px-4 py-2">
         {/* Logo */}
-        <div className="cursor-pointer" onClick={() => navigate("/")}>
+        {theme === "light" ? (<div className="cursor-pointer" onClick={() => navigate("/")}>
           <img src={logo} width="60" alt="Logo" />
-        </div>
+        </div>) : (<div className="cursor-pointer" onClick={() => navigate("/")}>
+          <img src={darkLogo} width="60" alt="Logo" />
+        </div>)}
+
 
         {/* Menu items */}
-        <div className="hidden md:flex gap-8 items-center text-blue-800 font-source-code-pro">
+        <div className="hidden md:flex gap-8 items-center text-blue-800 dark:text-white font-source-code-pro">
           {menuItems.map(({ path, key }, index) => (
             <div
               key={key}
@@ -89,51 +96,56 @@ function NavBar({ activeSection }) {
           ))}
         </div>
 
-        {/* Language selector */}
-        <div>
-          <IconButton onClick={handleLanguageMenuOpen} size="small" sx={{ p: 0 }}>
-            <img
-              src={i18n.language === "en" ? enImg : trImg}
-              alt={i18n.language}
-              width={24}
-              height={16}
-              style={{ objectFit: "cover" }}
-            />
-          </IconButton>
+        {!isMobile && (
+          <div className="flex flex-row gap-4 items-center">
+            <div className="dark:bg-white dark:px-2">
+              <IconButton onClick={handleLanguageMenuOpen} size="small" sx={{ p: 0 }}>
+                <img
+                  src={i18n.language === "en" ? enImg : trImg}
+                  alt={i18n.language}
+                  width={24}
+                  height={16}
+                  style={{ objectFit: "cover" }}
+                />
+              </IconButton>
 
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleLanguageMenuClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-          >
-            <MenuItem onClick={() => changeLanguage("en")}>
-              <Box display="flex" alignItems="center" gap={1}>
-                <img src={enImg} alt="English" width={24} height={16} />
-                <span>English</span>
-              </Box>
-            </MenuItem>
-            <MenuItem onClick={() => changeLanguage("tr")}>
-              <Box display="flex" alignItems="center" gap={1}>
-                <img src={trImg} alt="Türkçe" width={24} height={16} />
-                <span>Türkçe</span>
-              </Box>
-            </MenuItem>
-          </Menu>
-        </div>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleLanguageMenuClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem onClick={() => changeLanguage("en")}>
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <img src={enImg} alt="English" width={24} height={16} />
+                    <span>English</span>
+                  </Box>
+                </MenuItem>
+                <MenuItem onClick={() => changeLanguage("tr")}>
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <img src={trImg} alt="Türkçe" width={24} height={16} />
+                    <span>Türkçe</span>
+                  </Box>
+                </MenuItem>
+              </Menu>
+            </div>
+
+            <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
+          </div>
+        )}
 
         {/* Mobile menu button */}
         {isMobile && (
           <IconButton
             edge="start"
-            color="inherit"
+            className={`${theme === "light" ? "!text-zinc-900" : "!text-white"}`}
             aria-label="menu"
             onClick={() => setDrawerOpen(true)}
           >
@@ -147,18 +159,47 @@ function NavBar({ activeSection }) {
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
+        PaperProps={{
+          sx: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            padding: 2,
+            bgcolor: theme === 'light' ? 'background.paper' : 'grey.100',
+          },
+        }}
       >
-        <List>
+        <List sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
           {menuItems.map(({ path, key }, index) => (
             <ListItem
               button
               key={key}
               onClick={() => handleClickItem(path, index)}
             >
-              <ListItemText primary={t(key)} />
+              <span className="relative font-rubik">
+                {selectedIndex === index && (
+                  <span className="absolute inset-0 -rotate-12 bg-blue-300 opacity-30 px-4 rounded pointer-events-none z-0"></span>
+                )}
+                <span className="font-rubik">{t(key)}</span>
+              </span>
+
             </ListItem>
           ))}
         </List>
+
+        <Box
+          sx={{
+            borderTop: '1px solid',
+            borderColor: theme === 'light' ? 'grey.300' : 'grey.700',
+            pt: 2,
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: 2,
+          }}
+        >
+          <LanguageToggleButton />
+          <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
+        </Box>
       </Drawer>
     </div>
   );

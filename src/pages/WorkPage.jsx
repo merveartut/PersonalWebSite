@@ -35,33 +35,37 @@ function WorkPage() {
               window.open(item.link, "_blank");
             }
           }}
-          className="rounded-lg shadow-md border-[1px] bg-zinc-50 bg-opacity-80 border-blue-900 p-6 w-[320px] h-[360px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+          className="rounded-lg shadow-md border-[1px] bg-zinc-50 border-blue-900 p-6 w-[320px] h-[360px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
           style={{
             minWidth: 0,
           }}
         >
-          <div className="flex flex-col gap-2 w-full flex-grow">
+          <div className="flex flex-col gap-6 w-full flex-grow">
             <h3 className="text-xl font-rubik ">{item.title}</h3>
             <p className="font-roboto ">{item.description}</p>
 
-            {/* 🟡 Progress Warning */}
-            {!item.statusDone && (
-              <p className="text-yellow-600 font-semibold text-sm">
-                🚧 Work in Progress
-              </p>
-            )}
+            <div className="flex flex-col gap-2">
+              {/* 🟡 Progress Warning */}
+              {!item.statusDone && (
+                <p className="text-yellow-600 font-semibold text-sm">
+                  🚧 Work in Progress
+                </p>
+              )}
 
-            <strong
-              onClick={() => window.open(item.githubLink, "_blank")}
-              className="cursor-pointer text-blue-600 hover:underline font-roboto-mono"
-            >
-              Open GitHub
-            </strong>
-            <div className="flex flex-row gap-2 flex-wrap">
-              {item.technologies.map((tech) => (
-                <Chip label={tech} className="!bg-blue-900 !text-white !font-roboto !font-medium"></Chip>
-              ))}
+              <span
+                onClick={() => window.open(item.githubLink, "_blank")}
+                className="cursor-pointer text-blue-600 hover:underline font-rubik font-medium"
+              >
+                Open GitHub
+              </span>
+              <div className="flex flex-row gap-2 flex-wrap">
+                {item.technologies.map((tech) => (
+                  <Chip label={tech} className="!bg-blue-900 !text-white !font-roboto !font-medium"></Chip>
+                ))}
+              </div>
             </div>
+
+
           </div>
 
 

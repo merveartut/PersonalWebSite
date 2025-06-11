@@ -10,5 +10,19 @@
   "emailInput": "Your email",
   "message": "Your message",
   "send": "Send",
-  "getintouch": "Get In Touch"
+  "getintouch": "Get In Touch",
+  "succeedMessage": "Yay! Your message just landed 🚀. I’ll get back to you soon—stay tuned!",
+  "sgkDescription1": "Participate in new front-end projects for SGK systems.",
+  "sgkDescription2": "Worked with Context management, Micro Front-end, Redux, Formik, Yup, Axios.",
+  "sgkDescription3": "Integrated REST APIs and used tools like Postman, Jest, Vitest, Storybook, and Figma.",
+  "turboardDescription1": "Designed and implemented components for the Turboard app.",
+  "turboardDescription2": "Resolved issues in Django backend.",
+  "turboardDescription3": "Performed unit testing with Vitest.",
+  "turboardDescription4": "Fixed bugs in Django backend and VueJS frontend.",
+  "turboardDescription5": "Learned to operate the Turboard app.",
+  "medyasoftDescription1": "Designed and implemented web apps using .NET, Angular, and PostgreSQL based on client requests.",
+  "sgkPeriod": "July 11, 2024 – Present",
+  "turboardPeriod1": "Nov 1, 2022 – July 8, 2024",
+  "turboardPeriod2": "Aug, 2022 – Sep, 2022",
+  "medyasoftPeriod": "July, 2021 – Aug, 2021"
 }

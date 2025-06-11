@@ -1,6 +1,6 @@
 import "./App.css";
 import HomePage from "./pages/HomePage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -15,11 +15,23 @@ import { ExperiencePage } from "./pages/ExperiencePage";
 
 function App() {
   const [activeSection, setActiveSection] = useState("");
+  const [theme, setTheme] = useState(() =>
+    localStorage.getItem("theme") || "light"
+  );
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === "light" ? "dark" : "light"));
+  };
   return (
     <Provider store={store}>
       {/* The Router should wrap the whole app */}
       <Router>
-        <NavBar activeSection={activeSection} />
+        <NavBar activeSection={activeSection} theme={theme} toggleTheme={toggleTheme} />
         <main className="flex-1 flex items-center justify-center overflow-x-hidden ">
           <Routes>
             <Route path="/" element={<HomePage setActiveSection={setActiveSection} />} />

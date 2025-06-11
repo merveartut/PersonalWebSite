@@ -12,7 +12,7 @@ function TextInput({ label, value, setValue, name }) {
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder={displayLabel ? "" : label}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={setValue}
         className={`
           h-[40px] w-[300px] rounded-[6px] border border-gray-500 
           p-[6px] bg-[#f9f9f9] font-roboto 
@@ -20,16 +20,7 @@ function TextInput({ label, value, setValue, name }) {
           placeholder:text-gray-400 placeholder:text-[14px] placeholder:pl-[8px]
         `}
       />
-      {displayLabel && (
-        <span
-          className="
-            absolute left-[2px] top-[-14px] bg-transparent
-            text-[12px] text-gray-500 px-[4px]
-          "
-        >
-          {label}
-        </span>
-      )}
+
     </div>
   );
 }
