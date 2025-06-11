@@ -67,9 +67,9 @@ function NavBar({ activeSection, toggleTheme, theme }) {
     <div className="fixed top-0 left-0 w-full bg-zinc-50 dark:bg-slate-800 z-30 shadow-sm">
       <div className="flex items-center justify-between px-4 py-2">
         {/* Logo */}
-        {theme === "light" ? (<div className="cursor-pointer" onClick={() => navigate("/")}>
+        {theme === "light" ? (<div className="cursor-pointer" onClick={() => navigate(`#about`)}>
           <img src={logo} width="60" alt="Logo" />
-        </div>) : (<div className="cursor-pointer" onClick={() => navigate("/")}>
+        </div>) : (<div className="cursor-pointer" onClick={() => navigate(`#about`)}>
           <img src={darkLogo} width="60" alt="Logo" />
         </div>)}
 
