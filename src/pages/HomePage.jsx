@@ -10,7 +10,6 @@ import {
 import ContactPage from "./ContactPage";
 import { AboutPage } from "./AboutPage";
 import WorkPage from "./WorkPage";
-import { SkillsPage } from "./SkillsPage";
 import { ExperiencePage } from "./ExperiencePage";
 
 function HomePage({ setActiveSection }) {

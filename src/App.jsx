@@ -10,7 +10,6 @@ import BlogPage from "./pages/BlogPage";
 import ContactPage from "./pages/ContactPage";
 import { AboutPage } from "./pages/AboutPage";
 import NavBar from "./components/NavBar";
-import { SkillsPage } from "./pages/SkillsPage";
 import { ExperiencePage } from "./pages/ExperiencePage";
 
 function App() {
