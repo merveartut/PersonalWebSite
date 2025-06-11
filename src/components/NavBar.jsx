@@ -52,6 +52,7 @@ function NavBar({ activeSection, toggleTheme, theme }) {
   const selectedIndex = menuItems.findIndex(item => item.key === activeSection);
 
   const handleClickItem = (page, index) => {
+    console.log(page, "pppp")
     const [path, hash] = page.split("#");
     if (path === "/" && hash) {
       navigate(`#${hash}`);
@@ -67,9 +68,9 @@ function NavBar({ activeSection, toggleTheme, theme }) {
     <div className="fixed top-0 left-0 w-full bg-zinc-50 dark:bg-slate-800 z-30 shadow-sm">
       <div className="flex items-center justify-between px-4 py-2">
         {/* Logo */}
-        {theme === "light" ? (<div className="cursor-pointer" onClick={() => navigate(`#about`)}>
+        {theme === "light" ? (<div className="cursor-pointer" onClick={() => handleClickItem(`/#about`)}>
           <img src={logo} width="60" alt="Logo" />
-        </div>) : (<div className="cursor-pointer" onClick={() => navigate(`#about`)}>
+        </div>) : (<div className="cursor-pointer" onClick={() => handleClickItem(`/#about`)}>
           <img src={darkLogo} width="60" alt="Logo" />
         </div>)}
 
