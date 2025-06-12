@@ -6,7 +6,7 @@ const workItems = [
     technologies: ["React.js", "Spring Boot", "Spring Security", "PostgreSQL"],
     githubLink: "https://github.com/merveartut/TaskManager",
     link: "https://taskmanager-xuzz.onrender.com",
-    statusDone: true,
+    statusDone: false,
     images: [],
   },
   {
