@@ -2,7 +2,7 @@ const workItems = [
   {
     title: "Task Manager App",
     description:
-      "An e-commerce application featuring product listings, shopping cart functionality, and a checkout process.",
+      "A secure and scalable task management system with user authentication, role-based access, and task tracking,built using Spring Boot and PostgreSQL.",
     technologies: ["React.js", "Spring Boot", "Spring Security", "PostgreSQL"],
     githubLink: "https://github.com/merveartut/TaskManager",
     link: "https://taskmanager-xuzz.onrender.com",
@@ -28,9 +28,7 @@ const workItems = [
     statusDone: true,
     githubLink: "https://github.com/merveartut/PersonalWebSite",
     link: "https://merveartut.com",
-    images: [
-
-    ],
+    images: [],
   },
 ];
 export default workItems;
