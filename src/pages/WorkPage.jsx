@@ -3,9 +3,7 @@ import styles from "./WorkPage.module.css";
 import Modal from "../components/ModalContainer";
 import ImageSlider from "../components/ImageSlider";
 import workItems from "../data/workItems";
-import {
-  Chip,
-} from "@mui/material";
+import { Chip } from "@mui/material";
 
 function WorkPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +33,7 @@ function WorkPage() {
               window.open(item.link, "_blank");
             }
           }}
-          className="rounded-lg shadow-md border-[1px] bg-zinc-50 border-blue-900 p-6 w-[320px] h-[360px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+          className="rounded-lg shadow-md border-[1px] bg-zinc-50 border-blue-900 p-8 w-[320px] h-[400px] flex flex-col items-center gap-4 hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
           style={{
             minWidth: 0,
           }}
@@ -60,32 +58,34 @@ function WorkPage() {
               </span>
               <div className="flex flex-row gap-2 flex-wrap">
                 {item.technologies.map((tech) => (
-                  <Chip label={tech} className="!bg-blue-900 !text-white !font-roboto !font-medium"></Chip>
+                  <Chip
+                    label={tech}
+                    size="small"
+                    className="!bg-blue-900 !text-white !font-roboto !font-medium"
+                  ></Chip>
                 ))}
               </div>
             </div>
-
-
           </div>
 
-
-
-
-
           {/* Move Modal outside the map or keep here if modal tied to each item */}
-          <Modal Modal isOpen={isModalOpen} closeModal={closeModal} >
+          <Modal Modal isOpen={isModalOpen} closeModal={closeModal}>
             <ImageSlider slides={selectedImages} />
           </Modal>
-        </div >
-      ))
-      }
-      <Modal isOpen={showProgressModal} closeModal={() => setShowProgressModal(false)} >
+        </div>
+      ))}
+      <Modal
+        isOpen={showProgressModal}
+        closeModal={() => setShowProgressModal(false)}
+      >
         <div className="p-4 text-center">
           <h2 className="text-xl font-bold mb-2">🚧 Work in Progress</h2>
-          <p className="text-gray-700">This project is not yet live. Please check back later!</p>
+          <p className="text-gray-700">
+            This project is not yet live. Please check back later!
+          </p>
         </div>
       </Modal>
-    </div >
+    </div>
   );
 }
 
