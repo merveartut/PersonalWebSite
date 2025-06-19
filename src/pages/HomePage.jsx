@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
-
-import { useNavigate } from "react-router-dom";
-
 import { useInView } from "react-intersection-observer";
-import {
-  useMediaQuery,
-} from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 import ContactPage from "./ContactPage";
 import { AboutPage } from "./AboutPage";
@@ -13,7 +8,6 @@ import WorkPage from "./WorkPage";
 import { ExperiencePage } from "./ExperiencePage";
 
 function HomePage({ setActiveSection }) {
-
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const [aboutRef, aboutInView] = useInView({ threshold: 0.6 });
@@ -43,7 +37,9 @@ function HomePage({ setActiveSection }) {
       <section
         id="about"
         ref={aboutRef}
-        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center bg-zinc-50  text-black p-10 !py-[32px] snap-start ${isMobile ? "mt-[60px]" : ""}`}
+        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center bg-zinc-50  text-black p-10 !py-[32px] snap-start ${
+          isMobile ? "mt-[60px]" : ""
+        }`}
       >
         <AboutPage />
       </section>

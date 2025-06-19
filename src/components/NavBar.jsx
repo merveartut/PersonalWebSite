@@ -17,7 +17,7 @@ import trImg from "../assets/tr.png";
 import enImg from "../assets/en.png";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 import logo from "../assets/log.png";
-import darkLogo from "../assets/dark_logo.png"
+import darkLogo from "../assets/dark_logo.png";
 import { LanguageToggleButton } from "./LanguageToggleButton";
 
 function NavBar({ activeSection, toggleTheme, theme }) {
@@ -49,10 +49,12 @@ function NavBar({ activeSection, toggleTheme, theme }) {
   };
   console.log(i18n);
 
-  const selectedIndex = menuItems.findIndex(item => item.key === activeSection);
+  const selectedIndex = menuItems.findIndex(
+    (item) => item.key === activeSection
+  );
 
-  const handleClickItem = (page, index) => {
-    console.log(page, "pppp")
+  const handleClickItem = (page) => {
+    console.log(page, "pppp");
     const [path, hash] = page.split("#");
     if (path === "/" && hash) {
       navigate(`#${hash}`);
@@ -68,12 +70,21 @@ function NavBar({ activeSection, toggleTheme, theme }) {
     <div className="fixed top-0 left-0 w-full bg-zinc-50 dark:bg-slate-800 z-30 shadow-sm">
       <div className="flex items-center justify-between px-4 py-2">
         {/* Logo */}
-        {theme === "light" ? (<div className="cursor-pointer" onClick={() => handleClickItem(`/#about`)}>
-          <img src={logo} width="60" alt="Logo" />
-        </div>) : (<div className="cursor-pointer" onClick={() => handleClickItem(`/#about`)}>
-          <img src={darkLogo} width="60" alt="Logo" />
-        </div>)}
-
+        {theme === "light" ? (
+          <div
+            className="cursor-pointer"
+            onClick={() => handleClickItem(`/#about`)}
+          >
+            <img src={logo} width="60" alt="Logo" />
+          </div>
+        ) : (
+          <div
+            className="cursor-pointer"
+            onClick={() => handleClickItem(`/#about`)}
+          >
+            <img src={darkLogo} width="60" alt="Logo" />
+          </div>
+        )}
 
         {/* Menu items */}
         <div className="hidden md:flex gap-8 items-center text-blue-800 dark:text-white font-source-code-pro">
@@ -100,7 +111,11 @@ function NavBar({ activeSection, toggleTheme, theme }) {
         {!isMobile && (
           <div className="flex flex-row gap-4 items-center">
             <div className="dark:bg-white dark:px-2">
-              <IconButton onClick={handleLanguageMenuOpen} size="small" sx={{ p: 0 }}>
+              <IconButton
+                onClick={handleLanguageMenuOpen}
+                size="small"
+                sx={{ p: 0 }}
+              >
                 <img
                   src={i18n.language === "en" ? enImg : trImg}
                   alt={i18n.language}
@@ -115,12 +130,12 @@ function NavBar({ activeSection, toggleTheme, theme }) {
                 open={Boolean(anchorEl)}
                 onClose={handleLanguageMenuClose}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
+                  vertical: "bottom",
+                  horizontal: "right",
                 }}
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
               >
                 <MenuItem onClick={() => changeLanguage("en")}>
@@ -146,7 +161,9 @@ function NavBar({ activeSection, toggleTheme, theme }) {
         {isMobile && (
           <IconButton
             edge="start"
-            className={`${theme === "light" ? "!text-zinc-900" : "!text-white"}`}
+            className={`${
+              theme === "light" ? "!text-zinc-900" : "!text-white"
+            }`}
             aria-label="menu"
             onClick={() => setDrawerOpen(true)}
           >
@@ -162,15 +179,17 @@ function NavBar({ activeSection, toggleTheme, theme }) {
         onClose={() => setDrawerOpen(false)}
         PaperProps={{
           sx: {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
             padding: 2,
-            bgcolor: theme === 'light' ? 'background.paper' : 'grey.100',
+            bgcolor: theme === "light" ? "background.paper" : "grey.100",
           },
         }}
       >
-        <List sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <List
+          sx={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 2 }}
+        >
           {menuItems.map(({ path, key }, index) => (
             <ListItem
               button
@@ -183,18 +202,17 @@ function NavBar({ activeSection, toggleTheme, theme }) {
                 )}
                 <span className="font-rubik">{t(key)}</span>
               </span>
-
             </ListItem>
           ))}
         </List>
 
         <Box
           sx={{
-            borderTop: '1px solid',
-            borderColor: theme === 'light' ? 'grey.300' : 'grey.700',
+            borderTop: "1px solid",
+            borderColor: theme === "light" ? "grey.300" : "grey.700",
             pt: 2,
-            display: 'flex',
-            justifyContent: 'flex-end',
+            display: "flex",
+            justifyContent: "flex-end",
             gap: 2,
           }}
         >

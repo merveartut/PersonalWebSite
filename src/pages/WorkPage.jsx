@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "./WorkPage.module.css";
 import Modal from "../components/ModalContainer";
 import ImageSlider from "../components/ImageSlider";
 import workItems from "../data/workItems";
@@ -14,10 +13,7 @@ function WorkPage() {
     setIsModalOpen(false);
     setSelectedImages([]);
   };
-  const openModal = (images) => {
-    setSelectedImages(images);
-    setIsModalOpen(true);
-  };
+
   return (
     <div
       className={`flex flex-wrap min-h-screen h-full  gap-8 items-center justify-center p-10 snap-start w-full max-w-full px-4 py-5 `}
