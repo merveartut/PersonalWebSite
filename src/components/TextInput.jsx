@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TextInput({ label, value, setValue, name }) {
+function TextInput({ label, value, setValue, name, type }) {
   const [displayLabel, setDisplayLabel] = useState(false);
   const handleFocus = () => setDisplayLabel(true);
   const handleBlur = () => setDisplayLabel(false);
@@ -8,6 +8,7 @@ function TextInput({ label, value, setValue, name }) {
     <div className="relative">
       <input
         name={name}
+        type={type}
         value={value}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -20,7 +21,6 @@ function TextInput({ label, value, setValue, name }) {
           placeholder:text-gray-400 placeholder:text-[14px] placeholder:pl-[8px]
         `}
       />
-
     </div>
   );
 }

@@ -94,6 +94,7 @@ function ContactPage() {
               <div className="mb-4">
                 <TextInput
                   name="email"
+                  type="email"
                   value={formData.email}
                   setValue={handleChange}
                   label={t("emailInput")}
