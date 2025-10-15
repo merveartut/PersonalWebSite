@@ -68,7 +68,7 @@ export const ExperiencePage = () => {
     },
   ];
   return (
-    <div className="min-h-screen pt-64 w-full max-w-4xl px-4 flex justify-center">
+    <div className="pt-20 sm:py-40 pb-20 w-full max-w-4xl px-4 flex justify-center">
       <div className="w-full  flex flex-col gap-4">
         {experiences.map((exp, index) => (
           <Accordion

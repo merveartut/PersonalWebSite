@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 const AnimatedModel = () => {
   const group = useRef();
-  const { scene, animations } = useGLTF("/path/to/your/model.gltf");
+  const { scene, animations } = useGLTF("/assets/models/butterfly.glb");
 
   // Mixer for animations
   const mixer = useRef();

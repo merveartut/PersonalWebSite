@@ -4,7 +4,6 @@ import { useMediaQuery } from "@mui/material";
 
 import ContactPage from "./ContactPage";
 import { AboutPage } from "./AboutPage";
-import WorkPage from "./WorkPage";
 import { ExperiencePage } from "./ExperiencePage";
 
 function HomePage({ setActiveSection }) {
@@ -37,9 +36,7 @@ function HomePage({ setActiveSection }) {
       <section
         id="about"
         ref={aboutRef}
-        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center bg-zinc-50  text-black p-10 !py-[32px] snap-start ${
-          isMobile ? "mt-[60px]" : ""
-        }`}
+        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center  bg-gradient-to-b from-zinc-50 to-[#f8f6f8] text-black p-10 !py-[32px] snap-start `}
       >
         <AboutPage />
       </section>
@@ -47,18 +44,18 @@ function HomePage({ setActiveSection }) {
       <section
         id="experience"
         ref={experienceRef}
-        className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-[#f2eef1] dark:bg-slate-800"
+        className="flex flex-col md:flex-row gap items-center justify-center sm:!py-[32px] snap-start bg-gradient-to-b from-[#f8f6f8] to-[#f2eef1] dark:bg-slate-800"
       >
         <ExperiencePage />
       </section>
 
-      <section
+      {/* <section
         id="works"
         ref={worksRef}
         className="min-h-screen flex flex-col  md:flex-row gap items-center justify-center bg-gradient-to-b !py-[32px] snap-start bg-zinc-50 dark:bg-zinc-900"
       >
         <WorkPage />
-      </section>
+      </section> */}
 
       {/* Section 3 - Contact */}
       <section

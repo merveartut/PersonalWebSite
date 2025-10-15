@@ -20,3 +20,56 @@ code {
 .cursor-magnify {
   cursor: url("/assets/search.png"), auto;
 }
+
+/* Flying path */
+@keyframes fly-butterfly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.9;
+  }
+  25% {
+    transform: translate(60px, -80px) rotate(10deg);
+  }
+  50% {
+    transform: translate(140px, -40px) rotate(-10deg);
+  }
+  75% {
+    transform: translate(220px, -90px) rotate(5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+.animate-fly-butterfly {
+  animation: fly-butterfly 10s ease-in-out infinite alternate;
+}
+
+/* Wingbeat animations */
+@keyframes wingbeat-left {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(-20deg) scale(1.05);
+  }
+}
+
+@keyframes wingbeat-right {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(20deg) scale(1.05);
+  }
+}
+
+.animate-wingbeat-left {
+  animation: wingbeat-left 0.6s ease-in-out infinite;
+}
+
+.animate-wingbeat-right {
+  animation: wingbeat-right 0.6s ease-in-out infinite;
+}

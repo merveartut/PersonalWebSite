@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import profile from "../assets/profile.png";
 import profileDark from "../assets/profile_dark.png";
@@ -6,12 +5,16 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 import RoleTyping from "../components/RoleTyping";
+import ButterflyScene from "../components/ButterflyScene";
 
 export const AboutPage = () => {
   const { t } = useTranslation();
   const theme = localStorage.getItem("theme");
+
   return (
-    <div className="relative w-full min-h-screen flex flex-col md:flex-row items-center justify-center px-4 text-black dark:text-white p-10 snap-start gap-[40px] md:gap-[1px] lg:gap-[1px]">
+    <div className="relative w-full min-h-screen flex flex-col md:flex-row items-center justify-center px-4 text-black dark:text-white p-10 snap-start gap-2 md:gap-[1px] lg:gap-[1px]">
+      {/* <ButterflyScene /> */}
+
       {/* Text Section */}
       <div className="flex flex-col gap-8 items-center md:items-start">
         <div className="flex flex-col gap-4 text-center md:text-left">
@@ -90,7 +93,7 @@ export const AboutPage = () => {
       </div>
 
       {/* Profile Image */}
-      <div className="flex justify-center md:justify-start">
+      <div className="flex justify-center md:justify-start relative">
         <div className="relative w-[200px] h-[300px] md:w-[250px] md:h-[350px] lg:w-[300px] lg:h-[400px]">
           {/* Background Shape */}
           {/* <div className="absolute -top-4 -left-4 w-full h-full rounded-full bg-gradient-to-br from-pink-400 via-purple-400 to-blue-400 transform rotate-3 shadow-lg"></div> */}
