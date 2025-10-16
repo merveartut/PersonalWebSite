@@ -52,11 +52,7 @@ const Toolbar = () => {
     <>
       {/* 🖥️ DESKTOP TOOLBAR */}
       {!isMobile && (
-        <div
-          className="flex fixed top-1/2 right-4 -translate-y-1/2 z-50"
-          onMouseEnter={handleHover}
-          onMouseLeave={handleHideToolbar}
-        >
+        <div className="flex fixed top-1/2 right-4 -translate-y-1/2 z-50">
           {/* Toolbar content */}
           <div
             className={`absolute right-0 flex-col gap-4 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 h-72 flex items-center
@@ -93,15 +89,29 @@ const Toolbar = () => {
           </div>
 
           {/* Black line + chevron */}
-          <div className="flex items-center justify-center">
-            <div className="h-72 flex items-center">
+          <div
+            onMouseEnter={handleHover}
+            onMouseLeave={handleHideToolbar}
+            className="flex items-center justify-center relative"
+          >
+            {/* Arrow */}
+            <div
+              className={`h-72 flex items-center transition-opacity duration-500 ${
+                hideToolBar ? "opacity-100 animate-blink" : "opacity-0"
+              }`}
+            >
               <ChevronLeft
                 style={{ height: "40px", width: "40px" }}
-                className={`transition-transform duration-500 text-gray-600`}
+                className="transition-transform duration-500 text-gray-600"
               />
             </div>
 
-            <div className="bg-gray-600 dark:bg-white w-1 h-72 rounded-l-sm cursor-pointer transition-all duration-500" />
+            {/* Line */}
+            <div
+              className={`bg-gray-600 dark:bg-white w-1 h-72 rounded-l-sm cursor-pointer transition-all duration-500 ${
+                hideToolBar ? "animate-blinkWithShadow" : ""
+              }`}
+            />
           </div>
         </div>
       )}

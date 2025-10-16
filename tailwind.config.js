@@ -18,6 +18,20 @@ export default {
         anton: ["Anton"],
       },
     },
+    keyframes: {
+      blinkWithShadow: {
+        "0%, 100%": { opacity: "1", "box-shadow": "0 0 10px rgba(0,0,0,0.5)" },
+        "50%": { opacity: "0.3", "box-shadow": "0 0 2px rgba(0,0,0,0.2)" },
+      },
+      blink: {
+        "0%, 100%": { opacity: "1" },
+        "50%": { opacity: "0.3" },
+      },
+    },
+    animation: {
+      blinkWithShadow: "blinkWithShadow 2s infinite",
+      blink: "blink 2s infinite",
+    },
   },
   plugins: [],
 };
