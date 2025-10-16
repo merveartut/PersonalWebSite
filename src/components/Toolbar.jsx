@@ -53,13 +53,13 @@ const Toolbar = () => {
       {/* 🖥️ DESKTOP TOOLBAR */}
       {!isMobile && (
         <div
-          className="hidden md:flex fixed top-1/2 right-4 -translate-y-1/2 z-50"
+          className="flex fixed top-1/2 right-4 -translate-y-1/2 z-50"
           onMouseEnter={handleHover}
           onMouseLeave={handleHideToolbar}
         >
           {/* Toolbar content */}
           <div
-            className={`absolute right-0 flex-col gap-4 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 
+            className={`absolute right-0 flex-col gap-4 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 h-72 flex items-center
                       rounded-l-xl overflow-hidden shadow-lg px-4 py-6 transition-all duration-500
                       ${
                         hideToolBar
@@ -93,15 +93,15 @@ const Toolbar = () => {
           </div>
 
           {/* Black line + chevron */}
-          <div className="flex">
-            <div className="h-80 flex items-center">
+          <div className="flex items-center justify-center">
+            <div className="h-72 flex items-center">
               <ChevronLeft
                 style={{ height: "40px", width: "40px" }}
                 className={`transition-transform duration-500 text-gray-600`}
               />
             </div>
 
-            <div className="bg-gray-600 dark:bg-white w-1 h-80 rounded-l-sm cursor-pointer transition-all duration-500" />
+            <div className="bg-gray-600 dark:bg-white w-1 h-72 rounded-l-sm cursor-pointer transition-all duration-500" />
           </div>
         </div>
       )}
@@ -120,7 +120,8 @@ const Toolbar = () => {
           )}
 
           {mobileOpen && (
-            <div className="flex justify-between px-8 py-2">
+            <div className="fixed flex justify-between px-8 py-2 bg-[#f8f6f8] z-30 w-full">
+              <div className="w-6"></div>
               <div
                 className={`flex flex-row items-center justify-center gap-3 overflow-hidden transition-all duration-500
                         `}

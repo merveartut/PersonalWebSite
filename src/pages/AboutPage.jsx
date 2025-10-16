@@ -13,8 +13,6 @@ export const AboutPage = () => {
 
   return (
     <div className="relative w-full min-h-screen flex flex-col md:flex-row items-center justify-center px-4 text-black dark:text-white p-10 snap-start gap-2 md:gap-[1px] lg:gap-[1px]">
-      {/* <ButterflyScene /> */}
-
       {/* Text Section */}
       <div className="flex flex-col gap-8 items-center md:items-start">
         <div className="flex flex-col gap-4 text-center md:text-left">
@@ -84,7 +82,7 @@ export const AboutPage = () => {
         </div>
 
         <a
-          href="/Merve_Artut_CV.pdf"
+          href="/Merve-Artut-Resume.pdf"
           download="Merve_Artut_CV.pdf"
           className="border-[1px] border-black p-4 rounded-3xl font-roboto-mono shadow-md hover:bg-[#E4D9FF]"
         >

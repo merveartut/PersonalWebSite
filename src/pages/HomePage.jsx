@@ -5,6 +5,7 @@ import { useMediaQuery } from "@mui/material";
 import ContactPage from "./ContactPage";
 import { AboutPage } from "./AboutPage";
 import { ExperiencePage } from "./ExperiencePage";
+import ButterflyScene from "../components/ButterflyScene";
 
 function HomePage({ setActiveSection }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -32,11 +33,13 @@ function HomePage({ setActiveSection }) {
 
   return (
     <div className="w-full h-full snap-y snap-mandatory scroll-smooth">
+      {/* <ButterflyScene /> */}
+      <ButterflyScene />
       {/* Section 1 - About Me */}
       <section
         id="about"
         ref={aboutRef}
-        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center  bg-gradient-to-b from-zinc-50 to-[#f8f6f8] text-black p-10 !py-[32px] snap-start `}
+        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center  bg-zinc-50 text-black p-10 !py-[32px] snap-start `}
       >
         <AboutPage />
       </section>
@@ -61,7 +64,7 @@ function HomePage({ setActiveSection }) {
       <section
         id="contact"
         ref={contactRef}
-        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b  snap-start bg-[#f2eef1] dark:bg-slate-800"
+        className="min-h-screen flex flex-col items-center justify-center snap-start bg-zinc-50 dark:bg-slate-800"
       >
         <ContactPage />
       </section>
