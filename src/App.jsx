@@ -1,69 +1,67 @@
-import "./App.css";
-import HomePage from "./pages/HomePage";
-import { useState, useEffect } from "react";
-import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./redux/store";
-import WorkPage from "./pages/WorkPage";
-import ContactPage from "./pages/ContactPage";
-import { AboutPage } from "./pages/AboutPage";
-import { ExperiencePage } from "./pages/ExperiencePage";
-import Toolbar from "./components/Toolbar";
+// src/App.jsx - Düzeltilmiş ve Temizlenmiş Hali
+
+import React, { useState, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useTheme } from "./context/ThemeContext";
+
+import Preloader from "./components/Preloader";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ThemeSwitcher from "./components/ThemeSwitcher";
+import AnimatedCursor from "react-animated-cursor";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+const HomePage = React.lazy(() => import("./pages/HomePage"));
+// Diğer sayfalarınız buraya eklenebilir
 
 function App() {
-  const [activeSection, setActiveSection] = useState("");
-  const [themeMode, setThemeMode] = useState(
-    () => localStorage.getItem("theme") || "light"
-  );
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", themeMode === "dark");
-    localStorage.setItem("theme", themeMode);
-  }, [themeMode]);
-
-  const toggleTheme = () =>
-    setThemeMode((prev) => (prev === "light" ? "dark" : "light"));
+  const { theme } = useTheme();
+  // activeSection state'i artık Navbar'a prop olarak geçirilecek
+  const [activeSection, setActiveSection] = useState("home"); 
 
   return (
-    <Provider store={store}>
-      {/* The Router should wrap the whole app */}
+    <ErrorBoundary>
       <Router>
-        <Toolbar />
-        <main className="flex-1 flex items-center justify-center overflow-x-hidden ">
-          <Routes>
-            <Route
-              path="/"
-              element={<HomePage setActiveSection={setActiveSection} />}
-            />
-            <Route
-              path="/home"
-              element={
-                <AboutPage
-                  setActiveSection={setActiveSection}
-                  toggleTheme={toggleTheme}
-                />
-              }
-            />
-            <Route
-              path="/about"
-              element={<AboutPage setActiveSection={setActiveSection} />}
-            />
-            <Route
-              path="/works"
-              element={<WorkPage setActiveSection={setActiveSection} />}
-            />
-            <Route
-              path="/experience"
-              element={<ExperiencePage setActiveSection={setActiveSection} />}
-            />
-            <Route
-              path="/contact"
-              element={<ContactPage setActiveSection={setActiveSection} />}
-            />
-          </Routes>
-        </main>
+        {/* Tema sınıfını body/html yerine App sarmalayıcısına uyguluyoruz */}
+        <div className={`app-container relative min-h-screen flex flex-col font-sans ${theme} transition-colors duration-500`}>
+          
+          {/* Custom Animated Cursor - Prop tamamlama eklendi */}
+          <AnimatedCursor
+            innerSize={8}
+            outerSize={35}
+            innerScale={1}
+            outerScale={2}
+            outerAlpha={0.3}
+            has  // Eksik olan prop'u tamamlama (varsayımsal)
+            showSystemCursor={true} // Varsayılan cursor'ı göstermeye devam et
+            clickables={[
+              "a",
+              "button",
+              ".clickable", // Tailwind sınıflarınızdan birini ekleyebilirsiniz
+              { target: 'input[type="text"]' },
+            ]}
+          />
+
+          <Navbar activeSection={activeSection} /> 
+          <ThemeSwitcher /> {/* Tema değiştiriciyi en üste sabitleyelim */}
+
+          {/* Ana İçerik Alanı */}
+          <main className="flex-grow">
+            <Suspense fallback={<Preloader />}>
+              <Routes>
+                {/* setActiveSection prop'unu HomePage'e iletiyoruz */}
+                <Route path="/" element={<HomePage setActiveSection={setActiveSection} />} />
+                {/* Diğer Rotalar */}
+              </Routes>
+            </Suspense>
+          </main>
+
+          <Footer />
+
+        </div>
       </Router>
-    </Provider>
+    </ErrorBoundary>
   );
 }
 
-export default App;
+export default App; // Bu dosyanın adı App.jsx olduğu için App'i export ediyoruz.

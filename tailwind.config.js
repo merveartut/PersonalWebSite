@@ -1,36 +1,41 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "class",
+// tailwind.config.js
+module.exports = {
+  darkMode: ["class", '[data-theme="dark"]'], // Bu satır değişti
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        // Light Mode renkleri
+        light: {
+          background: "#f8f8f8",
+          text: "#333333",
+          primary: "#6B46C1",
+          secondary: "#9F7AEA",
+          accent: "#D6BCFA",
+        },
+        // Dark Mode renkleri
+        dark: {
+          background: "#1a1a2e",
+          text: "#e0e0e0",
+          primary: "#9F7AEA",
+          secondary: "#6B46C1",
+          accent: "#4A2D8F",
+        },
+        // Hacker Mode renkleri
+        hacker: {
+          background: "#0a0a0a",
+          text: "#00ff00",
+          primary: "#00cc00",
+          secondary: "#009900",
+          accent: "#006600",
+        },
+      },
       fontFamily: {
-        "roboto-mono": ['"Roboto Mono"', "monospace"],
-        "source-code-pro": ['"Source Code Pro"', "monospace"],
-        rubik: ['"Rubik"', "monospace"],
-        roboto: ['"Roboto"', "monospace"],
-        zain: ['"Zain"', "monospace"],
-        jura: ['"Jura"', "monospace"],
-        titillium: ['"Titillium Web"', "sans-serif"],
-        londrina: ['"Londrina Shadow"'],
-        notable: ['"Notable"'],
-        nerko: ["Nerko One"],
-        anton: ["Anton"],
+        // Yeni fontlar eklenebilir
+        sans: ["Inter", "sans-serif"],
+        mono: ["'Fira Code'", "monospace"], // Hacker modu için
+        display: ["'Bebas Neue'", "cursive"], // Başlıklar için
       },
-    },
-    keyframes: {
-      blinkWithShadow: {
-        "0%, 100%": { opacity: "1", "box-shadow": "0 0 10px rgba(0,0,0,0.5)" },
-        "50%": { opacity: "0.3", "box-shadow": "0 0 2px rgba(0,0,0,0.2)" },
-      },
-      blink: {
-        "0%, 100%": { opacity: "1" },
-        "50%": { opacity: "0.3" },
-      },
-    },
-    animation: {
-      blinkWithShadow: "blinkWithShadow 2s infinite",
-      blink: "blink 2s infinite",
     },
   },
   plugins: [],

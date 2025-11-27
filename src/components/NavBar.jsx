@@ -1,227 +1,184 @@
-// import React, { useState } from "react";
-// import {
-//   Box,
-//   IconButton,
-//   Drawer,
-//   List,
-//   ListItem,
-//   ListItemText,
-//   useMediaQuery,
-//   Menu,
-//   MenuItem,
-// } from "@mui/material";
-// import MenuIcon from "@mui/icons-material/Menu";
-// import { useTranslation } from "react-i18next";
-// import { useNavigate } from "react-router-dom";
-// import trImg from "../assets/tr.png";
-// import enImg from "../assets/en.png";
-// import { ThemeToggleButton } from "./ThemeToggleButton";
-// import logo from "../assets/log.png";
-// import darkLogo from "../assets/dark_logo.png";
-// import { LanguageToggleButton } from "./LanguageToggleButton";
+// src/components/Navbar.jsx - TAMAMLANMIŞ VE REVİZE EDİLMİŞ
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
-// function NavBar({ activeSection, toggleTheme, theme }) {
-//   const [hoveredIndex, setHoveredIndex] = useState(null);
-//   const [drawerOpen, setDrawerOpen] = useState(false);
-//   const [anchorEl, setAnchorEl] = useState(null);
-//   const isMobile = useMediaQuery("(max-width: 768px)");
-//   const { t, i18n } = useTranslation();
-//   const navigate = useNavigate();
+const navItems = [
+  { name: "Hakkımda", id: "about" },
+  { name: "Deneyimler", id: "experience" },
+  // { name: "Çalışmalar", id: "works" }, // Eğer WorkPage eklenecekse aktif edilir
+  { name: "İletişim", id: "contact" },
+];
 
-//   const menuItems = [
-//     { path: "/#about", key: "about" },
-//     { path: "/#experience", key: "experience" },
-//     { path: "/#works", key: "works" },
-//     { path: "/#contact", key: "contact" },
-//   ];
+const Navbar = ({ activeSection }) => {
+  const { theme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
 
-//   const handleLanguageMenuOpen = (event) => {
-//     setAnchorEl(event.currentTarget);
-//   };
+  // Sayfa içi gezinme fonksiyonu
+  const handleScroll = (id) => {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    setIsOpen(false); // Mobil menüyü kapat
+  };
 
-//   const handleLanguageMenuClose = () => {
-//     setAnchorEl(null);
-//   };
+  const getNavLinkClass = (id) => {
+    let base = "relative block px-3 py-2 rounded-md text-lg font-medium transition-colors duration-300 ";
+    const isActive = activeSection === id;
 
-//   const changeLanguage = (lng) => {
-//     i18n.changeLanguage(lng);
-//     handleLanguageMenuClose();
-//   };
-//   console.log(i18n);
+    // Renk Teması
+    if (theme === "dark") {
+      base += isActive ? "text-purple-400" : "text-gray-300 hover:text-purple-300";
+    } else if (theme === "hacker") {
+      base += isActive ? "text-hacker-text shadow-[0_0_5px_var(--color-text)]" : "text-hacker-secondary hover:text-hacker-primary";
+    } else { // light
+      base += isActive ? "text-purple-600" : "text-gray-700 hover:text-purple-500";
+    }
 
-//   const selectedIndex = menuItems.findIndex(
-//     (item) => item.key === activeSection
-//   );
+    // Alt Çizgi Animasyonu (after elementi)
+    if (isActive) {
+      base += " after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-2/3 after:h-[2px] after:bg-purple-500 dark:after:bg-purple-400 hacker:after:bg-hacker-text after:rounded-full after:transition-all after:duration-300 after:scale-x-100";
+    } else {
+      // Hata burada oluşmuştu. Bu kısmı tamamlıyoruz.
+      base += " after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-purple-500 dark:after:bg-purple-400 hacker:after:bg-hacker-text after:rounded-full after:transition-all after:duration-300 hover:after:w-2/3";
+    }
+    return base;
+  };
 
-//   const handleClickItem = (page) => {
-//     console.log(page, "pppp");
-//     const [path, hash] = page.split("#");
-//     if (path === "/" && hash) {
-//       navigate(`#${hash}`);
-//       const element = document.getElementById(hash);
-//       if (element) element.scrollIntoView({ behavior: "smooth" });
-//     } else {
-//       navigate(page);
-//     }
-//     if (isMobile) setDrawerOpen(false);
-//   };
+  const navItemVariants = {
+    open: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { stiffness: 1000, velocity: -100 },
+      },
+    },
+    closed: {
+      y: 50,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 },
+      },
+    },
+  };
 
-//   return (
-//     <div className="fixed top-0 left-0 w-full bg-zinc-50 dark:bg-slate-800 z-30 shadow-sm">
-//       <div className="flex items-center justify-between px-4 py-2">
-//         {/* Logo */}
-//         {theme === "light" ? (
-//           <div
-//             className="cursor-pointer"
-//             onClick={() => handleClickItem(`/#about`)}
-//           >
-//             <img src={logo} width="60" alt="Logo" />
-//           </div>
-//         ) : (
-//           <div
-//             className="cursor-pointer"
-//             onClick={() => handleClickItem(`/#about`)}
-//           >
-//             <img src={darkLogo} width="60" alt="Logo" />
-//           </div>
-//         )}
+  // Navigasyonun asıl dönüş bloğu (return)
+  return (
+    <motion.nav
+      className={`fixed top-0 left-0 w-full z-40 transition-colors duration-500 shadow-md ${
+        theme === "dark" ? "bg-dark-background/90" : 
+        theme === "hacker" ? "bg-hacker-background/90 border-b border-hacker-primary" : 
+        "bg-white/90"
+      } backdrop-blur-sm`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          
+          {/* Logo / İsim */}
+          <motion.div
+            className="flex-shrink-0 text-2xl font-display font-bold cursor-pointer"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            onClick={() => handleScroll('home-dummy')} // En üste dön
+          >
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500 hacker:text-hacker-text">
+              M.A.
+            </span>
+          </motion.div>
 
-//         {/* Menu items */}
-//         <div className="hidden md:flex gap-8 items-center text-blue-800 dark:text-white font-source-code-pro">
-//           {menuItems.map(({ path, key }, index) => (
-//             <div
-//               key={key}
-//               onClick={() => handleClickItem(path, index)}
-//               onMouseEnter={() => setHoveredIndex(index)}
-//               onMouseLeave={() => setHoveredIndex(null)}
-//               className={`cursor-pointer flex items-center gap-1 transition-all duration-200
-//                 ${hoveredIndex === index ? "translate-y-[-1px]" : ""}
-//               `}
-//             >
-//               <span className="relative font-rubik">
-//                 {selectedIndex === index && (
-//                   <span className="absolute inset-0 -rotate-12 bg-blue-300 opacity-30 px-4 rounded pointer-events-none z-0"></span>
-//                 )}
-//                 <span className="relative z-10">{t(key)}</span>
-//               </span>
-//             </div>
-//           ))}
-//         </div>
+          {/* Masaüstü Menüsü */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navItems.map((item) => (
+                <motion.a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScroll(item.id);
+                  }}
+                  className={getNavLinkClass(item.id)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {item.name}
+                </motion.a>
+              ))}
+            </div>
+          </div>
 
-//         {!isMobile && (
-//           <div className="flex flex-row gap-4 items-center">
-//             <div className="dark:bg-white dark:px-2">
-//               <IconButton
-//                 onClick={handleLanguageMenuOpen}
-//                 size="small"
-//                 sx={{ p: 0 }}
-//               >
-//                 <img
-//                   src={i18n.language === "en" ? enImg : trImg}
-//                   alt={i18n.language}
-//                   width={24}
-//                   height={16}
-//                   style={{ objectFit: "cover" }}
-//                 />
-//               </IconButton>
+          {/* Mobil Menü Butonu */}
+          <div className="-mr-2 flex md:hidden">
+            <motion.button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${
+                theme === "hacker" ? "text-hacker-text hover:bg-hacker-secondary" : 
+                theme === "dark" ? "text-gray-400 hover:text-white hover:bg-gray-700" : 
+                "text-gray-700 hover:text-gray-900 hover:bg-gray-200"
+              }`}
+              aria-expanded={isOpen}
+              whileTap={{ scale: 0.9 }}
+            >
+              {isOpen ? (
+                <CloseIcon fontSize="large" />
+              ) : (
+                <MenuIcon fontSize="large" />
+              )}
+            </motion.button>
+          </div>
+        </div>
+      </div>
 
-//               <Menu
-//                 anchorEl={anchorEl}
-//                 open={Boolean(anchorEl)}
-//                 onClose={handleLanguageMenuClose}
-//                 anchorOrigin={{
-//                   vertical: "bottom",
-//                   horizontal: "right",
-//                 }}
-//                 transformOrigin={{
-//                   vertical: "top",
-//                   horizontal: "right",
-//                 }}
-//               >
-//                 <MenuItem onClick={() => changeLanguage("en")}>
-//                   <Box display="flex" alignItems="center" gap={1}>
-//                     <img src={enImg} alt="English" width={24} height={16} />
-//                     <span>English</span>
-//                   </Box>
-//                 </MenuItem>
-//                 <MenuItem onClick={() => changeLanguage("tr")}>
-//                   <Box display="flex" alignItems="center" gap={1}>
-//                     <img src={trImg} alt="Türkçe" width={24} height={16} />
-//                     <span>Türkçe</span>
-//                   </Box>
-//                 </MenuItem>
-//               </Menu>
-//             </div>
+      {/* Mobil Menü Açılır Alanı (Framer Motion ile animasyonlu) */}
+      {isOpen && (
+        <motion.div
+          className={`md:hidden ${
+            theme === "hacker" ? "bg-hacker-background border-t border-hacker-primary" : 
+            theme === "dark" ? "bg-dark-background/95" : 
+            "bg-white/95"
+          } p-4`}
+          initial="closed"
+          animate="open"
+          exit="closed"
+          variants={{
+            open: { opacity: 1, height: "auto" },
+            closed: { opacity: 0, height: 0 },
+          }}
+          transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
+        >
+          <motion.div
+            className="px-2 pt-2 pb-3 space-y-1 sm:px-3"
+            variants={{
+              open: {
+                transition: { staggerChildren: 0.07, delayChildren: 0.2 }
+              },
+              closed: {
+                transition: { staggerChildren: 0.05, staggerDirection: -1 }
+              }
+            }}
+          >
+            {navItems.map((item) => (
+              <motion.a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleScroll(item.id);
+                }}
+                className={`w-full text-center ${getNavLinkClass(item.id)}`}
+                variants={navItemVariants}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {item.name}
+              </motion.a>
+            ))}
+          </motion.div>
+        </motion.div>
+      )}
+    </motion.nav>
+  );
+};
 
-//             <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
-//           </div>
-//         )}
-
-//         {/* Mobile menu button */}
-//         {isMobile && (
-//           <IconButton
-//             edge="start"
-//             className={`${
-//               theme === "light" ? "!text-zinc-900" : "!text-white"
-//             }`}
-//             aria-label="menu"
-//             onClick={() => setDrawerOpen(true)}
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//         )}
-//       </div>
-
-//       {/* Mobile drawer */}
-//       <Drawer
-//         anchor="right"
-//         open={drawerOpen}
-//         onClose={() => setDrawerOpen(false)}
-//         PaperProps={{
-//           sx: {
-//             display: "flex",
-//             flexDirection: "column",
-//             justifyContent: "space-between",
-//             padding: 2,
-//             bgcolor: theme === "light" ? "background.paper" : "grey.100",
-//           },
-//         }}
-//       >
-//         <List
-//           sx={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 2 }}
-//         >
-//           {menuItems.map(({ path, key }, index) => (
-//             <ListItem
-//               button
-//               key={key}
-//               onClick={() => handleClickItem(path, index)}
-//             >
-//               <span className="relative font-rubik">
-//                 {selectedIndex === index && (
-//                   <span className="absolute inset-0 -rotate-12 bg-blue-300 opacity-30 px-4 rounded pointer-events-none z-0"></span>
-//                 )}
-//                 <span className="font-rubik">{t(key)}</span>
-//               </span>
-//             </ListItem>
-//           ))}
-//         </List>
-
-//         <Box
-//           sx={{
-//             borderTop: "1px solid",
-//             borderColor: theme === "light" ? "grey.300" : "grey.700",
-//             pt: 2,
-//             display: "flex",
-//             justifyContent: "flex-end",
-//             gap: 2,
-//           }}
-//         >
-//           <LanguageToggleButton />
-//           <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
-//         </Box>
-//       </Drawer>
-//     </div>
-//   );
-// }
-
-// export default NavBar;
+export default Navbar;

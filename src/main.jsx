@@ -1,16 +1,14 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
+// main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./i18n";
-import { I18nextProvider } from "react-i18next";
-import i18n from "./i18n";
-import '@fontsource/titillium-web';
+import "./index.css";
+import { ThemeProvider } from "./context/ThemeContext.jsx"; // ThemeProvider import edildi
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <I18nextProvider i18n={i18n}>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <ThemeProvider> {/* Uygulama ThemeProvider ile sarmalandı */}
       <App />
-    </I18nextProvider>
-  </StrictMode>
+    </ThemeProvider>
+  </React.StrictMode>
 );

@@ -1,75 +1,63 @@
+/* index.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Bebas+Neue&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Tema renkleri için CSS değişkenleri */
+:root {
+  /* Light Theme Vars */
+  --color-bg: #f8f8f8;
+  --color-text: #333333;
+  --color-primary: #6b46c1;
+  --color-secondary: #9f7aea;
+  --color-accent: #d6bcfa;
+}
+
+.dark {
+  /* Dark Theme Vars */
+  --color-bg: #1a1a2e;
+  --color-text: #e0e0e0;
+  --color-primary: #9f7aea;
+  --color-secondary: #6b46c1;
+  --color-accent: #4a2d8f;
+}
+
+.hacker {
+  /* Hacker Theme Vars */
+  --color-bg: #0a0a0a;
+  --color-text: #00ff00;
+  --color-primary: #00cc00;
+  --color-secondary: #009900;
+  --color-accent: #006600;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Roboto Mono", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", "Rubik", "Titillium Web", "Zain", "Jura",
-    "Londrina Shadow", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans); /* Tailwind config'den geliyor */
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    "Roboto Mono", "Titillium Web", "Rubik", "Zain", "Jura", monospace;
+/* Scrollbar styling (Hacker Mode için özelleştirilebilir) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
 }
 
-.cursor-magnify {
-  cursor: url("/assets/search.png"), auto;
+.hacker ::-webkit-scrollbar-thumb {
+  background: var(--color-text);
 }
-
-/* Flying path */
-@keyframes fly-butterfly {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 0.9;
-  }
-  25% {
-    transform: translate(60px, -80px) rotate(10deg);
-  }
-  50% {
-    transform: translate(140px, -40px) rotate(-10deg);
-  }
-  75% {
-    transform: translate(220px, -90px) rotate(5deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-}
-
-.animate-fly-butterfly {
-  animation: fly-butterfly 10s ease-in-out infinite alternate;
-}
-
-/* Wingbeat animations */
-@keyframes wingbeat-left {
-  0%,
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(-20deg) scale(1.05);
-  }
-}
-
-@keyframes wingbeat-right {
-  0%,
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(20deg) scale(1.05);
-  }
-}
-
-.animate-wingbeat-left {
-  animation: wingbeat-left 0.6s ease-in-out infinite;
-}
-
-.animate-wingbeat-right {
-  animation: wingbeat-right 0.6s ease-in-out infinite;
+.hacker ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
 }
