@@ -8,14 +8,17 @@ import WorkPage from "./pages/WorkPage";
 import ContactPage from "./pages/ContactPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ExperiencePage } from "./pages/ExperiencePage";
-import Toolbar from "./components/Toolbar";
+import ThemeToggleButton from "./components/ThemeToggleButton";
+import LanguageToggleButton from "./components/LanguageToggleButton";
 
 function App() {
   const [activeSection, setActiveSection] = useState("");
   const [themeMode, setThemeMode] = useState(
     () => localStorage.getItem("theme") || "light"
   );
+
   useEffect(() => {
+    // Tema değişikliğini HTML root elementine uygular
     document.documentElement.classList.toggle("dark", themeMode === "dark");
     localStorage.setItem("theme", themeMode);
   }, [themeMode]);
@@ -27,12 +30,21 @@ function App() {
     <Provider store={store}>
       {/* The Router should wrap the whole app */}
       <Router>
-        <Toolbar />
+        <div className="fixed top-6 right-6 z-[100] flex items-center gap-3">
+          <LanguageToggleButton />
+          <ThemeToggleButton themeMode={themeMode} toggleTheme={toggleTheme} />
+        </div>
+
         <main className="flex-1 flex items-center justify-center overflow-x-hidden ">
           <Routes>
             <Route
               path="/"
-              element={<HomePage setActiveSection={setActiveSection} />}
+              element={
+                <HomePage
+                  setActiveSection={setActiveSection}
+                  themeMode={themeMode}
+                />
+              }
             />
             <Route
               path="/home"

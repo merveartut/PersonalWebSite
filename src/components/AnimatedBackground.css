@@ -1,0 +1,57 @@
+/* src/components/AnimatedBackground.css */
+
+/* Dark/Light tema renk değişkenleri */
+:root {
+  --dot-color-1: #e4d9ff; /* Açık Tema: Açık Mor */
+  --dot-color-2: #273469; /* Açık Tema: Koyu Mavi */
+  --dot-color-3: #9b59b6; /* Açık Tema: Mor */
+}
+
+/* Koyu Tema renklerini belirlemek için */
+.dark {
+  --dot-color-1: #8e44ad; /* Koyu Tema: Daha belirgin mor */
+  --dot-color-2: #3498db; /* Koyu Tema: Mavi */
+  --dot-color-3: #f39c12; /* Koyu Tema: Turuncu */
+}
+
+/* Noktaların rastgele hareket etmesini sağlayan animasyon */
+@keyframes moveDots {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(5vw, 5vh) scale(1.2);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-5vw, 10vh) scale(0.8);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translate(10vw, -5vh) scale(1.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+}
+
+.dot {
+  animation: moveDots infinite alternate;
+  /* Animasyon süresi .jsx içinde ayarlanıyor */
+}
+
+/* Dark mode aktif olduğunda çalışacak */
+.dark .neon-border {
+  box-shadow: 0 0 12px #00ffbf, 0 0 24px #00ffbf,
+    0 0 48px rgba(0, 255, 191, 0.5);
+  border: 1px solid #00ffbf;
+}
+
+/* Light mode'da kesinlikle görünmesin */
+.neon-border {
+  box-shadow: none !important;
+  border: none !important;
+}

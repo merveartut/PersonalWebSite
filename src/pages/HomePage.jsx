@@ -33,13 +33,13 @@ function HomePage({ setActiveSection }) {
 
   return (
     <div className="w-full h-full snap-y snap-mandatory scroll-smooth">
-      {/* <ButterflyScene /> */}
-      <ButterflyScene />
       {/* Section 1 - About Me */}
       <section
         id="about"
         ref={aboutRef}
-        className={`w-full !min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col md:flex-row gap-[60px] items-center justify-center  bg-zinc-50 text-black p-10 !py-[32px] snap-start `}
+        // DÜZELTME: min-h-screen'i korurken, içerik dikeyde merkeze hizalanacak
+        // ancak taşma varsa scroll'a izin verecek şekilde padding ve esneklik ekliyoruz.
+        className={`w-full min-h-screen flex dark:bg-zinc-900 dark:text-white flex-col items-center justify-center bg-zinc-50 text-black  snap-start`}
       >
         <AboutPage />
       </section>
@@ -47,7 +47,7 @@ function HomePage({ setActiveSection }) {
       <section
         id="experience"
         ref={experienceRef}
-        className="flex flex-col md:flex-row gap items-center justify-center sm:!py-[32px] snap-start bg-gradient-to-b from-[#f8f6f8] to-[#f2eef1] dark:bg-slate-800"
+        className="flex flex-col md:flex-row gap items-center justify-center  snap-start bg-gradient-to-b from-[#f8f6f8] to-[#f2eef1] dark:bg-slate-800"
       >
         <ExperiencePage />
       </section>

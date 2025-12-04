@@ -11,6 +11,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { OpenInNewRounded } from "@mui/icons-material";
 import { LocationOnRounded } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import AnimatedBackground from "../components/AnimatedBackground";
 
 export const ExperiencePage = () => {
   const { t } = useTranslation();
@@ -68,8 +69,13 @@ export const ExperiencePage = () => {
     },
   ];
   return (
-    <div className="pt-20 sm:py-40 pb-20 w-full max-w-4xl px-4 flex justify-center">
-      <div className="w-full  flex flex-col gap-4">
+    <div
+      className="relative pt-20 sm:py-40 pb-20 w-full h-auto px-4 flex justify-center  text-black dark:text-[var(--hacker-text)]
+  dark:bg-[var(--hacker-bg)]
+  hacker-scanlines"
+    >
+      <AnimatedBackground />{" "}
+      <div className="w-full sm:w-[80%] lg:w-[60%] flex flex-col gap-4">
         {experiences.map((exp, index) => (
           <Accordion
             key={index}

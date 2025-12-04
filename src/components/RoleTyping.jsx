@@ -16,7 +16,8 @@ export default function RoleTyping() {
         speed={50}
         deletionSpeed={30}
         repeat={Infinity}
-        className="font-zain text-3xl italic font-medium text-primary"
+        className="font-zain italic font-medium text-primary text-base md:text-lg lg:text-3xl dark:text-[var(--hacker-neon-blue)]
+dark:drop-shadow-[0_0_6px_var(--hacker-neon-blue)]"
       />
     </div>
   );

@@ -10,6 +10,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { useTranslation } from "react-i18next";
 import letter from "../assets/letter.png";
 import letterDark from "../assets/letter_dark.png";
+import AnimatedBackground from "../components/AnimatedBackground";
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -61,18 +62,17 @@ function ContactPage() {
   };
   return (
     <div
-      className={`flex flex-col w-full h-full items-center justify-center px-4 ${
-        isSmallScreen ? "py-10" : "ml-[160px] py-20"
-      }`}
+      className={`relative flex flex-col w-full h-screen items-center justify-center px-4 dark:text-[var(--hacker-text)]
+  dark:bg-[var(--hacker-bg)]
+  hacker-scanlines`}
     >
-      {theme === "light" ? (
-        <img src={letter} className="absolute !mr-[800px]" width={400}></img>
-      ) : (
+      <AnimatedBackground />{" "}
+      {!isSmallScreen && (
         <img
-          src={letterDark}
+          src={theme === "light" ? letter : letterDark}
           className="absolute !mr-[800px]"
           width={400}
-        ></img>
+        />
       )}
       {!successMessage && (
         <form className="w-full max-w-screen-md" onSubmit={handleSubmit}>
