@@ -5,7 +5,6 @@ import { useMediaQuery } from "@mui/material";
 import ContactPage from "./ContactPage";
 import { AboutPage } from "./AboutPage";
 import { ExperiencePage } from "./ExperiencePage";
-import ButterflyScene from "../components/ButterflyScene";
 
 function HomePage({ setActiveSection }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
