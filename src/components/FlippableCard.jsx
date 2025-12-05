@@ -170,10 +170,10 @@ const FlippableCard = ({ theme }) => {
 "
         >
           {/* ... (Arka Yüz İçeriği aynı kaldı) ... */}
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-anton mb-6 lg:mb-8 text-black dark:text-white text-center border-b pb-3 border-gray-300 dark:border-gray-600">
+          <h3 className="text-xl md:text-2xl lg:text-3xl  mb-6 lg:mb-8 text-black dark:text-white text-center border-b pb-3 border-gray-300 dark:border-gray-600">
             {t("contactAndSocialMedia")}
           </h3>
-          <ul className="space-y-3 lg:space-y-6 font-jura font-medium text-xs md:text-base lg:text-xl">
+          <ul className="space-y-9 lg:space-y-6 font-jura font-medium text-xs md:text-base lg:text-xl">
             <li className="flex items-center gap-2 text-gray-800 dark:text-gray-300">
               <EmailIcon fontSize="small" className="text-red-500" />
               <span>merveartuttt@gmail.com</span>

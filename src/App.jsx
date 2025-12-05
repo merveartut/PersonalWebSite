@@ -33,7 +33,7 @@ function App() {
       <Router>
         <Navbar />
 
-        <div className="fixed bottom-12 right-6 z-[100] flex items-center gap-3">
+        <div className="fixed bottom-6 sm:bottom-12 right-6 z-[100] flex items-center gap-3">
           <LanguageToggleButton />
           <ThemeToggleButton themeMode={themeMode} toggleTheme={toggleTheme} />
         </div>
