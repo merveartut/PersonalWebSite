@@ -24,7 +24,6 @@ function ContactPage() {
   const { t } = useTranslation();
   const theme = localStorage.getItem("theme");
 
-  console.log("ttttjthth", theme);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({

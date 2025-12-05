@@ -10,6 +10,7 @@ import { AboutPage } from "./pages/AboutPage";
 import { ExperiencePage } from "./pages/ExperiencePage";
 import ThemeToggleButton from "./components/ThemeToggleButton";
 import LanguageToggleButton from "./components/LanguageToggleButton";
+import Navbar from "./components/NavBar";
 
 function App() {
   const [activeSection, setActiveSection] = useState("");
@@ -30,7 +31,9 @@ function App() {
     <Provider store={store}>
       {/* The Router should wrap the whole app */}
       <Router>
-        <div className="fixed top-6 right-6 z-[100] flex items-center gap-3">
+        <Navbar />
+
+        <div className="fixed bottom-12 right-6 z-[100] flex items-center gap-3">
           <LanguageToggleButton />
           <ThemeToggleButton themeMode={themeMode} toggleTheme={toggleTheme} />
         </div>

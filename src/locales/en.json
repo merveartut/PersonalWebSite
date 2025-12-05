@@ -29,5 +29,8 @@
   "turboardPeriod2": "Aug, 2022 – Sep, 2022",
   "medyasoftPeriod": "July, 2021 – Aug, 2021",
   "contactAndSocialMedia": "Contact & Social Media",
-  "turnCardDescription": "Click to manually turn the card or wait for it to turn automatically"
+  "turnCardDescription": "Click to manually turn the card or wait for it to turn automatically",
+  "hello": "Hello",
+  "myNameIs": "My name is",
+  "download": "Download CV"
 }

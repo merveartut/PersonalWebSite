@@ -60,8 +60,6 @@ const FlippableCard = ({ theme }) => {
     setIsFlipped(!isFlipped);
   };
 
-  const currentProfileImage = theme === "light" ? profile : profileDark;
-
   return (
     // Ana kart div'i: Büyük ekran genişlikleri artırıldı.
     <div
@@ -97,9 +95,9 @@ const FlippableCard = ({ theme }) => {
           <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 items-center md:items-start md:w-1/2 order-2 md:order-1">
             <div className="flex flex-col gap-2 md:gap-4 text-center sm:items-start items-center md:text-left w-full">
               <div className="flex text-md md:text-lg lg:text-xl gap-2">
-                <span>Hello,</span>
+                <span>{t("hello")},</span>
                 <span className="text-[#273469] dark:text-[#56c999] font-semibold">
-                  My name is
+                  {t("myNameIs")}
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -144,7 +142,7 @@ const FlippableCard = ({ theme }) => {
               className="border-[1px] border-black dark:border-white p-3 md:p-4 rounded-3xl font-roboto-mono text-sm md:text-base shadow-md hover:bg-[#E4D9FF] dark:hover:bg-[#43bda2] hover:text-black transition-colors duration-300"
             >
               {" "}
-              Download CV{" "}
+              {t("download")}{" "}
             </a>
           </div>
 

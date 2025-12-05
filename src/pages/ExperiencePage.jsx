@@ -130,8 +130,9 @@ export const ExperiencePage = () => {
               </ul>
 
               <div className="flex flex-row gap-2 flex-wrap">
-                {exp.techs.map((tech) => (
+                {exp.techs.map((tech, index) => (
                   <Chip
+                    key={index}
                     label={tech}
                     className="!bg-[#6d48d1] !text-white"
                   ></Chip>
